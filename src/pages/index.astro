@@ -1,12 +1,13 @@
 ---
 import Header from '../components/Header.astro';
 import HomeCard from '../components/HomeCard.astro';
+import CenterContainer from '../components/page_items/CenterContainer.astro';
 import Layout from '../layouts/Layout.astro';
-
-import { Icon } from 'astro-icon/components';
 ---
 
 <Layout>
 	<Header />
-	<HomeCard />
+	<CenterContainer>
+		<HomeCard />
+	</CenterContainer>
 </Layout>
