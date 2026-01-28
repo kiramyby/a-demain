@@ -9,14 +9,18 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/vue": "^5.1.0",
-    "@tailwindcss/vite": "^4.1.11",
-    "astro": "^5.11.0",
+    "@astrojs/react": "4.4.2",
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/react": "^19.2.10",
+    "@types/react-dom": "^19.2.3",
+    "astro": "5.16.15",
     "astro-icon": "^1.1.5",
-    "tailwindcss": "^4.1.11",
-    "vue": "^3.5.17"
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.3.13",
     "@iconify-json/line-md": "^1.2.8",
     "@iconify-json/mdi": "^1.2.3",
     "@types/bun": "^1.2.18"
