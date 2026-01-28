@@ -1,0 +1,55 @@
+---
+import type { MarkdownLayoutProps } from "astro";
+import Header from "../components/Header.astro";
+import Sheet from "../components/Sheet.astro";
+import { SITE_CONFIG } from "../config";
+import "./src/styles/global.css";
+
+type Props = MarkdownLayoutProps<{
+	title: string;
+	author: string;
+	date: string;
+	description?: string;
+	keywords?: string;
+	image?: string;
+}>;
+
+const { frontmatter, url } = Astro.props;
+const canonicalUrl = new URL(url || "/", Astro.site);
+const seoTitle = `${frontmatter.title} | ${SITE_CONFIG.author.name}`;
+const seoDescription = frontmatter.description || `About ${frontmatter.author}`;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- SEO Meta Tags -->
+		<title>{seoTitle}</title>
+		<meta name="description" content={seoDescription} />
+		<meta name="keywords" content={frontmatter.keywords || "about, profile, author"} />
+		<meta name="author" content={frontmatter.author} />
+		<link rel="canonical" href={canonicalUrl.toString()} />
+	</head>
+	<body>
+        <Header />
+        <Sheet>
+		<h1>{frontmatter.title}</h1>
+		<p>by {frontmatter.author}</p>
+		<slot />
+		<p><time datetime={frontmatter.date}>Updated: {frontmatter.date}</time></p>
+        </Sheet>
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>

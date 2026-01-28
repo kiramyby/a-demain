@@ -1,6 +1,6 @@
 export const SITE_CONFIG = {
 	author: {
-		name: "Kira Kiraco0n",
+		name: "Kira Kiracoon",
 		bio: "Web Dev | Cyber Security | Noob Writer",
 		email: "kiramyby@gmail.com",
 		avatarUrl:
@@ -10,4 +10,8 @@ export const SITE_CONFIG = {
 		github: "https://github.com/kiramyby",
 		x: "https://x.com/kir4_c4",
 	},
+	siteName: "Kiracoon's Blog",
+	siteDescription: "Welcome to Kiracoon's personal blog",
+	defaultImage: "https://blog.kiracoon.top/default-image.png",
+	lang: "en-US",
 };
