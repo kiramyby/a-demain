@@ -1,0 +1,309 @@
+---
+/**
+ * Astro 页面示例：文章列表
+ * 展示如何在 Astro 中使用 Notion API
+ */
+import Layout from "../layouts/Layout.astro";
+import { getAllPosts, getAllCategories, getAllTags } from "../lib/notion";
+import { getCategoryStats, getTagStats } from "../lib/notion-helpers";
+
+// 在构建时获取所有数据
+const posts = await getAllPosts();
+const categories = await getAllCategories();
+const tags = await getAllTags();
+const categoryStats = await getCategoryStats();
+const tagStats = await getTagStats();
+
+// 按分类分组
+const postsByCategory = categories.reduce(
+	(acc, cat) => {
+		acc[cat] = posts.filter((p) => p.category === cat);
+		return acc;
+	},
+	{} as Record<string, typeof posts>,
+);
+---
+
+<Layout title="博客文章 - A Demain">
+  <main class="container">
+    <h1>博客文章</h1>
+    
+    <!-- 统计信息 -->
+    <section class="stats">
+      <div class="stat-card">
+        <span class="stat-number">{posts.length}</span>
+        <span class="stat-label">篇文章</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">{categories.length}</span>
+        <span class="stat-label">个分类</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">{tags.length}</span>
+        <span class="stat-label">个标签</span>
+      </div>
+    </section>
+
+    <!-- 分类过滤 -->
+    <section class="categories">
+      <h2>分类</h2>
+      <div class="category-list">
+        {categories.map(cat => (
+          <a href={`/categories/${cat}`} class="category-tag">
+            {cat} ({categoryStats[cat]})
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- 文章列表 -->
+    <section class="posts">
+      {posts.map(post => (
+        <article class="post-card">
+          {post.coverImage && (
+            <img src={post.coverImage} alt={post.title} class="post-cover" />
+          )}
+          
+          <div class="post-content">
+            <div class="post-meta">
+              {post.category && (
+                <span class="post-category">{post.category}</span>
+              )}
+              {post.featured && (
+                <span class="post-featured">⭐ 精选</span>
+              )}
+            </div>
+            
+            <h2 class="post-title">
+              <a href={`/posts/${post.slug}`}>{post.title}</a>
+            </h2>
+            
+            {post.description && (
+              <p class="post-description">{post.description}</p>
+            )}
+            
+            <div class="post-footer">
+              <time datetime={post.publishedDate || ""}>
+                {post.publishedDate && new Date(post.publishedDate).toLocaleDateString('zh-CN')}
+              </time>
+              
+              {post.tags.length > 0 && (
+                <div class="post-tags">
+                  {post.tags.map(tag => (
+                    <span class="tag">#{tag}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </article>
+      ))}
+    </section>
+
+    <!-- 标签云 -->
+    <section class="tags-cloud">
+      <h2>标签云</h2>
+      <div class="tags">
+        {tags.map(tag => {
+          const count = tagStats[tag] || 0;
+          const size = Math.min(Math.max(12 + count * 2, 12), 24);
+          return (
+            <a 
+              href={`/tags/${tag}`} 
+              class="tag-cloud-item"
+              style={`font-size: ${size}px;`}
+            >
+              {tag}
+            </a>
+          );
+        })}
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  /* 统计卡片 */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .stat-card {
+    background: var(--color-bg-secondary);
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--color-primary);
+  }
+
+  .stat-label {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* 分类 */
+  .categories {
+    margin-bottom: 3rem;
+  }
+
+  .category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .category-tag {
+    padding: 0.5rem 1rem;
+    background: var(--color-bg-secondary);
+    border-radius: 20px;
+    text-decoration: none;
+    transition: transform 0.2s;
+  }
+
+  .category-tag:hover {
+    transform: translateY(-2px);
+    background: var(--color-primary);
+    color: white;
+  }
+
+  /* 文章列表 */
+  .posts {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .post-card {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--color-bg-secondary);
+    border-radius: 8px;
+    transition: transform 0.2s;
+  }
+
+  .post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .post-cover {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  .post-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .post-meta {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .post-category,
+  .post-featured {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .post-title {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  .post-title a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .post-title a:hover {
+    color: var(--color-primary);
+  }
+
+  .post-description {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  .post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+  }
+
+  .post-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    color: var(--color-primary);
+    font-size: 0.875rem;
+  }
+
+  /* 标签云 */
+  .tags-cloud {
+    text-align: center;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+  }
+
+  .tag-cloud-item {
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .tag-cloud-item:hover {
+    color: var(--color-primary);
+  }
+
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+    .post-card {
+      grid-template-columns: 1fr;
+    }
+
+    .post-cover {
+      height: 200px;
+    }
+  }
+</style>

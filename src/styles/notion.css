@@ -1,0 +1,110 @@
+/* CSS 层次控制，避免与 Tailwind 冲突 */
+@layer notion-base, notion-overrides;
+
+@layer notion-base {
+  /* react-notion-x 核心样式 */
+  @import 'react-notion-x/src/styles.css';
+
+  /* 代码高亮主题 */
+  @import 'prismjs/themes/prism-tomorrow.css';
+
+  /* 数学公式样式 */
+  @import 'katex/dist/katex.min.css';
+}
+
+@layer notion-overrides {
+  /* 使用 Tailwind 的字体主题 */
+  .notion {
+    font-family: theme('fontFamily.sans');
+  }
+
+  /* 移除默认内边距和边距，让 Astro 布局控制 */
+  .notion-page {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* 修复内容容器的边距问题 */
+  .notion-viewport {
+    padding: 0 !important;
+  }
+
+  /* 确保内容不会偏左 */
+  .notion-frame {
+    padding: 0 !important;
+  }
+
+  /* 移除 notion 默认的最大宽度限制，让父容器控制 */
+  .notion-page-content {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* 调整块的边距 */
+  .notion-block {
+    padding-left: 0 !important;
+  }
+
+  /* 保持合理的块间距 */
+  .notion-text,
+  .notion-heading,
+  .notion-list,
+  .notion-quote,
+  .notion-callout {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  /* 使用项目的颜色变量 */
+  .notion {
+    color: var(--color-text-primary);
+    background: transparent;
+  }
+
+  .notion-link {
+    color: var(--color-link);
+  }
+
+  .notion-link:hover {
+    color: var(--color-link-hover);
+  }
+
+  /* 代码块样式适配 */
+  .notion-code {
+    background: var(--color-bg-secondary) !important;
+  }
+
+  /* 标注块样式适配 */
+  .notion-callout {
+    background: var(--color-bg-secondary);
+    border-color: var(--color-border);
+  }
+
+  /* 引用块样式适配 */
+  .notion-quote {
+    border-left-color: var(--color-primary);
+    color: var(--color-text-secondary);
+  }
+
+  /* 表格样式 */
+  .notion-table {
+    border-color: var(--color-border);
+  }
+
+  .notion-table-cell {
+    border-color: var(--color-border);
+  }
+
+  /* 分隔线 */
+  .notion-hr {
+    border-color: var(--color-border);
+  }
+
+  /* 深色模式适配 */
+  @media (prefers-color-scheme: dark) {
+    .notion-code {
+      background: var(--color-bg-secondary) !important;
+    }
+  }
+}
+

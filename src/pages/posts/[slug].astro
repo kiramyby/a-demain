@@ -1,0 +1,395 @@
+---
+/**
+ * Astro 动态路由示例：文章详情页
+ * 路径：src/pages/posts/[slug].astro
+ */
+import Layout from "../../layouts/Layout.astro";
+import { getPostBySlug } from "../../lib/notion";
+import { getPostPaths, getTableOfContents, getReadingTime } from "../../lib/notion-helpers";
+import { getPageRecordMap, isPageAccessible } from "../../lib/notion-recordmap";
+import { buildPageIdToSlugMap } from "../../lib/notion-page-map";
+import NotionRenderer from "../../components/NotionRenderer";
+
+// Astro 静态路径生成 - 只构建可访问的页面
+export async function getStaticPaths() {
+	// 预加载 pageId->slug 映射
+	await buildPageIdToSlugMap();
+
+	const allPaths = await getPostPaths();
+
+	// 过滤出可访问的页面
+	const accessiblePaths = [];
+
+	for (const path of allPaths) {
+		const isAccessible = await isPageAccessible(path.props.post.id);
+
+		if (isAccessible) {
+			accessiblePaths.push(path);
+		} else {
+			console.warn(`⚠️  跳过不可访问的页面: ${path.params.slug} (${path.props.post.title})`);
+			console.warn(`   提示: 在 Notion 中使用 "Share to web" 公开此页面后重新构建`);
+		}
+	}
+
+	console.log(
+		`✓ 找到 ${accessiblePaths.length} 个可访问的页面（跳过 ${allPaths.length - accessiblePaths.length} 个未公开页面）`,
+	);
+
+	return accessiblePaths;
+}
+
+const { slug } = Astro.params;
+const { post } = Astro.props;
+
+// 检查是否是预览模式（通过查询参数）
+const isPreviewMode = Astro.url.searchParams.has('preview');
+
+// 验证文章状态（预览模式下允许草稿）
+if (!post || (!isPreviewMode && post.status !== 'Published')) {
+  return new Response(null, {
+    status: 404,
+    statusText: 'Not Found'
+  });
+}
+
+const isDraft = post.status !== 'Published';
+
+// 获取文章内容
+const recordMap = await getPageRecordMap(post.id);
+const toc = await getTableOfContents(post.id);
+const readingTime = await getReadingTime(post.id);
+
+// SEO 元数据
+const pageTitle = post.seoTitle || post.title;
+const pageDescription = post.description || `阅读文章：${post.title}`;
+---
+
+<Layout title={`${pageTitle} - A Demain`} description={pageDescription}>
+  <article class="post-detail">
+    <!-- 草稿预览提示 -->
+    {isDraft && (
+      <div class="draft-banner">
+        ⚠️ 这是草稿预览 - 未公开发布
+      </div>
+    )}
+
+    <!-- 文章头部 -->
+    <header class="post-header">
+      {post.coverImage && (
+        <img src={post.coverImage} alt={post.title} class="post-hero-image" />
+      )}
+      
+      <div class="post-header-content">
+        <div class="post-meta">
+          {post.category && (
+            <span class="category">{post.category}</span>
+          )}
+          {post.featured && (
+            <span class="featured">⭐ 精选文章</span>
+          )}
+        </div>
+        
+        <h1 class="post-title">{post.title}</h1>
+        
+        {post.description && (
+          <p class="post-description">{post.description}</p>
+        )}
+        
+        <div class="post-info">
+          {post.publishedDate && (
+            <time datetime={post.publishedDate}>
+              发布于 {new Date(post.publishedDate).toLocaleDateString('zh-CN')}
+            </time>
+          )}
+          
+          {post.updatedDate && post.updatedDate !== post.publishedDate && (
+            <span class="updated">
+              更新于 {new Date(post.updatedDate).toLocaleDateString('zh-CN')}
+            </span>
+          )}
+          
+          <span class="reading-time">📖 约 {readingTime} 分钟阅读</span>
+        </div>
+        
+        {post.tags.length > 0 && (
+          <div class="post-tags">
+            {post.tags.map(tag => (
+              <a href={`/tags/${tag}`} class="tag">#{tag}</a>
+            ))}
+          </div>
+        )}
+      </div>
+    </header>
+
+    <!-- 文章内容区域 -->
+    <div class="post-content-wrapper">
+      <!-- 目录 -->
+      {toc.length > 0 && (
+        <aside class="toc-sidebar">
+          <nav class="toc">
+            <h3>目录</h3>
+            <ul>
+              {toc.map(item => (
+                <li class={`toc-item toc-level-${item.level}`}>
+                  <a href={`#${item.id}`}>{item.text}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+      )}
+
+      <!-- 文章主体内容 -->
+      <main class="post-content">
+        <NotionRenderer
+          client:load
+          recordMap={recordMap}
+          rootPageId={post.id}
+          slug={slug}
+          post={post}
+        />
+      </main>
+    </div>
+
+    <!-- 文章底部 -->
+    <footer class="post-footer">
+      <div class="post-actions">
+        <a href="/posts" class="btn-back">← 返回文章列表</a>
+      </div>
+      
+      <div class="post-share">
+        <span>分享到：</span>
+        <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${Astro.url}`} 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="share-btn twitter">
+          Twitter
+        </a>
+      </div>
+    </footer>
+  </article>
+</Layout>
+
+<style>
+  .post-detail {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  /* 草稿预览提示 */
+  .draft-banner {
+    background: #ff9800;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+  }
+
+  /* 文章头部 */
+  .post-header {
+    margin-bottom: 3rem;
+  }
+
+  .post-hero-image {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+  }
+
+  .post-header-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .post-meta {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .category,
+  .featured {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .post-title {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .post-description {
+    font-size: 1.25rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .post-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-info time,
+  .post-info .updated,
+  .post-info .reading-time {
+    display: flex;
+    align-items: center;
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    padding: 0.25rem 0.75rem;
+    background: var(--color-bg-secondary);
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: background 0.2s;
+  }
+
+  .tag:hover {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  /* 内容布局 */
+  .post-content-wrapper {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* 目录侧边栏 */
+  .toc-sidebar {
+    position: sticky;
+    top: 2rem;
+    align-self: start;
+  }
+
+  .toc {
+    padding: 1rem;
+    background: var(--color-bg-secondary);
+    border-radius: 8px;
+  }
+
+  .toc h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+  }
+
+  .toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .toc-item {
+    margin-bottom: 0.5rem;
+  }
+
+  .toc-item a {
+    text-decoration: none;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    transition: color 0.2s;
+  }
+
+  .toc-item a:hover {
+    color: var(--color-primary);
+  }
+
+  .toc-level-1 { padding-left: 0; }
+  .toc-level-2 { padding-left: 1rem; }
+  .toc-level-3 { padding-left: 2rem; }
+
+  /* 文章内容 */
+  .post-content {
+    max-width: 800px;
+  }
+
+  /* react-notion-x 样式覆盖 */
+  .post-content :global(.notion) {
+    font-size: 1.05rem;
+  }
+
+  /* 文章底部 */
+  .post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .btn-back {
+    padding: 0.75rem 1.5rem;
+    background: var(--color-bg-secondary);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform 0.2s;
+  }
+
+  .btn-back:hover {
+    transform: translateX(-4px);
+  }
+
+  .post-share {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .share-btn {
+    padding: 0.5rem 1rem;
+    background: var(--color-primary);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .share-btn:hover {
+    opacity: 0.8;
+  }
+
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+    .post-content-wrapper {
+      grid-template-columns: 1fr;
+    }
+
+    .toc-sidebar {
+      position: static;
+    }
+
+    .post-title {
+      font-size: 1.75rem;
+    }
+
+    .post-footer {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+</style>

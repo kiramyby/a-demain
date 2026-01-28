@@ -13,4 +13,31 @@
 	--z-toast: 70;
 	--z-tooltip: 80;
 	--z-debug: 9999;
+
+	/* 颜色系统 */
+	--color-primary: #3b82f6;
+	--color-primary-hover: #2563eb;
+	--color-bg-primary: #ffffff;
+	--color-bg-secondary: #f3f4f6;
+	--color-text-primary: #111827;
+	--color-text-secondary: #6b7280;
+	--color-border: #e5e7eb;
+	--color-link: #3b82f6;
+	--color-link-hover: #2563eb;
 }
+
+/* 深色模式 */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-primary: #60a5fa;
+		--color-primary-hover: #93c5fd;
+		--color-bg-primary: #111827;
+		--color-bg-secondary: #1f2937;
+		--color-text-primary: #f9fafb;
+		--color-text-secondary: #9ca3af;
+		--color-border: #374151;
+		--color-link: #60a5fa;
+		--color-link-hover: #93c5fd;
+	}
+}
+
