@@ -8,7 +8,7 @@
 	"files": {
 		"ignoreUnknown": true,
 		"maxSize": 1048576,
-		"includes": ["**", "!!**/dist", "!!**/.astro", "!!**/bun.lockb"]
+		"includes": ["**", "!!**/dist", "!!**/.astro"]
 	},
 	"formatter": {
 		"enabled": true,

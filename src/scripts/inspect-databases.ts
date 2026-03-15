@@ -1,6 +1,6 @@
 /**
  * Notion 数据库结构诊断脚本
- * 运行: bun run src/scripts/inspect-databases.ts
+ * 运行: pnpm tsx src/scripts/inspect-databases.ts
  */
 
 import { Client, isFullDatabase } from "@notionhq/client";

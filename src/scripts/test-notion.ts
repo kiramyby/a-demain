@@ -1,6 +1,6 @@
 /**
  * Notion API 连接测试
- * 运行: bun run src/scripts/test-notion.ts
+ * 运行: pnpm tsx src/scripts/test-notion.ts
  */
 
 import { getAllPosts, getAllFriends } from "../lib/notion";
