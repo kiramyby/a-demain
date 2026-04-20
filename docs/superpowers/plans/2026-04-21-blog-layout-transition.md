@@ -8,6 +8,8 @@
 
 **Tech Stack:** Astro 6 (View Transitions API), Tailwind CSS 4, Playwright (E2E tests)
 
+**Prerequisite:** [`2026-04-21-testing-infrastructure.md`](./2026-04-21-testing-infrastructure.md) must be completed first — Playwright and test scripts must already be set up.
+
 ---
 
 ## File Map
@@ -25,71 +27,14 @@
 | Modify | `src/pages/tags/index.astro` — switch to BrowseLayout |
 | Modify | `src/pages/friends.astro` — switch to BrowseLayout |
 | Modify | `src/styles/global.css` — add `::view-transition-*` CSS overrides |
-| Create | `playwright.config.ts` |
-| Create | `tests/layout-transition.test.ts` |
+| Create | `tests/e2e/layout-transition.test.ts` |
 
 ---
 
-## Task 1: Install Playwright
+## Task 1: Write failing E2E tests
 
 **Files:**
-- Modify: `package.json`
-- Create: `playwright.config.ts`
-
-- [ ] **Step 1: Install Playwright**
-
-```bash
-pnpm add -D @playwright/test
-pnpm exec playwright install chromium
-```
-
-Expected output: `chromium` browser installed under `~/.cache/ms-playwright`.
-
-- [ ] **Step 2: Create `playwright.config.ts`**
-
-```typescript
-import { defineConfig, devices } from '@playwright/test'
-
-export default defineConfig({
-  testDir: './tests',
-  fullyParallel: true,
-  retries: 0,
-  use: {
-    baseURL: 'http://localhost:4321',
-  },
-  projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'mobile', use: { ...devices['iPhone 13'] } },
-  ],
-  webServer: {
-    command: 'pnpm dev',
-    url: 'http://localhost:4321',
-    reuseExistingServer: true,
-  },
-})
-```
-
-- [ ] **Step 3: Add test script to `package.json`**
-
-In the `"scripts"` section, add:
-```json
-"test": "playwright test",
-"test:ui": "playwright test --ui"
-```
-
-- [ ] **Step 4: Commit**
-
-```bash
-git add playwright.config.ts package.json pnpm-lock.yaml
-git commit -m "chore: add Playwright for E2E testing"
-```
-
----
-
-## Task 2: Write failing E2E tests
-
-**Files:**
-- Create: `tests/layout-transition.test.ts`
+- Create: `tests/e2e/layout-transition.test.ts`
 
 These tests define the contract. They will all fail until the layouts are implemented.
 
@@ -188,13 +133,13 @@ Expected: all tests FAIL (elements not found, layouts not yet implemented).
 - [ ] **Step 3: Commit failing tests**
 
 ```bash
-git add tests/layout-transition.test.ts
+git add tests/e2e/layout-transition.test.ts
 git commit -m "test: add failing E2E tests for layout transition"
 ```
 
 ---
 
-## Task 3: Add ViewTransitions to Layout.astro
+## Task 2: Add ViewTransitions to Layout.astro
 
 **Files:**
 - Modify: `src/layouts/Layout.astro`
@@ -250,7 +195,7 @@ git commit -m "feat: add ViewTransitions to base Layout"
 
 ---
 
-## Task 4: Create IntroLayout.astro
+## Task 3: Create IntroLayout.astro
 
 **Files:**
 - Create: `src/layouts/IntroLayout.astro`
@@ -386,7 +331,7 @@ git commit -m "feat: add IntroLayout with centered profile card"
 
 ---
 
-## Task 5: Create BrowseLayout.astro
+## Task 4: Create BrowseLayout.astro
 
 **Files:**
 - Create: `src/layouts/BrowseLayout.astro`
@@ -607,7 +552,7 @@ git commit -m "feat: add BrowseLayout with responsive sidebar/header"
 
 ---
 
-## Task 6: Update index.astro to use IntroLayout
+## Task 5: Update index.astro to use IntroLayout
 
 **Files:**
 - Modify: `src/pages/index.astro`
@@ -642,7 +587,7 @@ git commit -m "feat: update home page to use IntroLayout"
 
 ---
 
-## Task 7: Update all content pages to use BrowseLayout
+## Task 6: Update all content pages to use BrowseLayout
 
 **Files:**
 - Modify: `src/pages/posts.astro`
@@ -732,7 +677,7 @@ git commit -m "feat: update all content pages to use BrowseLayout"
 
 ---
 
-## Task 8: Update AboutLayout to delegate to BrowseLayout
+## Task 7: Update AboutLayout to delegate to BrowseLayout
 
 **Files:**
 - Modify: `src/layouts/AboutLayout.astro`
@@ -789,7 +734,7 @@ git commit -m "feat: update AboutLayout to use BrowseLayout"
 
 ---
 
-## Task 9: Add View Transition animation CSS
+## Task 8: Add View Transition animation CSS
 
 **Files:**
 - Modify: `src/styles/global.css`
@@ -838,7 +783,7 @@ git commit -m "feat: add scale animation for profile-card View Transition"
 
 ---
 
-## Task 10: Run full test suite + cleanup
+## Task 9: Run full test suite + cleanup
 
 **Files:**
 - (potentially) `src/components/Header.astro`, `src/components/CenterContainer.astro` — now unused
