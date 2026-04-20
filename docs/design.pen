@@ -1,0 +1,2953 @@
+{
+  "version": "2.10",
+  "children": [
+    {
+      "type": "frame",
+      "id": "lrIgT",
+      "x": 0,
+      "y": 0,
+      "name": "light · everyday（柔和日）",
+      "theme": {
+        "appearance": "light",
+        "flavor": "everyday"
+      },
+      "width": 1200,
+      "height": 680,
+      "fill": "$background",
+      "cornerRadius": "$radius-frame",
+      "stroke": {
+        "thickness": "$shell-stroke",
+        "fill": "$border-color"
+      },
+      "effect": {
+        "type": "shadow",
+        "shadowType": "outer",
+        "color": "$shadow-tint",
+        "offset": {
+          "x": "$shadow-x",
+          "y": "$shadow-y"
+        }
+      },
+      "children": [
+        {
+          "type": "frame",
+          "id": "Hj7rs",
+          "name": "sidebar",
+          "width": 272,
+          "height": "fill_container",
+          "fill": "$bg",
+          "stroke": {
+            "thickness": {
+              "right": "$shell-stroke"
+            },
+            "fill": "$border-color"
+          },
+          "layout": "vertical",
+          "gap": 28,
+          "padding": [
+            32,
+            28
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "LoPiZ",
+              "name": "brand",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 18,
+              "children": [
+                {
+                  "type": "rectangle",
+                  "cornerRadius": "$radius-avatar",
+                  "id": "2t9Hi",
+                  "name": "avatar",
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 125,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "$dawn",
+                        "position": 0
+                      },
+                      {
+                        "color": "$main",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 96,
+                  "height": 96,
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  }
+                },
+                {
+                  "type": "text",
+                  "id": "Jc0JN",
+                  "name": "siteTitle",
+                  "fill": "$foreground",
+                  "content": "à demain",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 30,
+                  "fontWeight": "$font-weight-title",
+                  "letterSpacing": -0.3
+                },
+                {
+                  "type": "text",
+                  "id": "qFqht",
+                  "name": "tagline",
+                  "fill": "$muted",
+                  "content": "明天见 · 慢慢写字",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "yaVNO",
+              "name": "nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "EyrrS",
+                  "fill": "$foreground",
+                  "content": "归档",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "tJluR",
+                  "fill": "$foreground",
+                  "content": "标签",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "7IiHm",
+                  "fill": "$foreground",
+                  "content": "好友",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "DHWpr",
+                  "fill": "$foreground",
+                  "content": "关于",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "VREpq",
+          "name": "main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "fill": "$background",
+          "layout": "vertical",
+          "gap": 22,
+          "padding": [
+            28,
+            36,
+            36,
+            36
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "bANi0",
+              "name": "toolbar",
+              "gap": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "kodTs",
+                  "name": "pillTech",
+                  "fill": "$pill-inactive",
+                  "cornerRadius": "$radius-pill",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "padding": [
+                    12,
+                    20
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "HU5tS",
+                      "fill": "$foreground",
+                      "content": "TECHNICAL",
+                      "fontFamily": "Roboto Mono",
+                      "fontSize": 15,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.6
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "oSXKR",
+                  "name": "pillDay",
+                  "fill": "$main",
+                  "cornerRadius": "$radius-pill",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "padding": [
+                    12,
+                    20
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Ks8GR",
+                      "fill": "$main-foreground",
+                      "content": "Everyday",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "uGr2U",
+              "name": "hr",
+              "fill": "$main",
+              "width": "fill_container",
+              "height": 4
+            },
+            {
+              "type": "frame",
+              "id": "KnCav",
+              "name": "cards",
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": 18,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "FyeiH",
+                  "name": "c1",
+                  "width": "fill_container",
+                  "fill": "$dawn",
+                  "cornerRadius": "$radius-card",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 22,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "zwRid",
+                      "fill": "$foreground",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "晨间速记：把念头留给明天",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 21,
+                      "fontWeight": "$font-weight-title"
+                    },
+                    {
+                      "type": "text",
+                      "id": "MuUaf",
+                      "fill": "$body-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "留给下一个清晨再读，不在夜里赶稿——这就是 à demain。",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "LaXlJ",
+                  "name": "c2",
+                  "width": "fill_container",
+                  "fill": "$noon",
+                  "cornerRadius": "$radius-card",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 22,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "FAAAh",
+                      "fill": "$foreground",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "白天搭建：工程与实践",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 21,
+                      "fontWeight": "$font-weight-title"
+                    },
+                    {
+                      "type": "text",
+                      "id": "vHdnN",
+                      "fill": "$body-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "技术向长文与工具链复盘，像午后光线一样扎实、清楚。",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "p7vZd",
+                  "name": "c3",
+                  "width": "fill_container",
+                  "fill": "$blue-hour",
+                  "cornerRadius": "$radius-card",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 22,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "jsYPn",
+                      "fill": "$foreground",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "暮色归档：标签与友人",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 21,
+                      "fontWeight": "$font-weight-title"
+                    },
+                    {
+                      "type": "text",
+                      "id": "vQaV0",
+                      "fill": "$body-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "标签、友链与关于页，收束成日后还能轻轻翻到的索引。",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "6q44i",
+                  "name": "c4",
+                  "width": "fill_container",
+                  "fill": "$dusk",
+                  "cornerRadius": "$radius-card",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 22,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Kjrt5",
+                      "fill": "$foreground",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "从黎明到蓝调时刻",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 21,
+                      "fontWeight": "$font-weight-title"
+                    },
+                    {
+                      "type": "text",
+                      "id": "IcdQb",
+                      "fill": "$body-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "暖纸白 / 雾紫侧栏 + 四张时间卡片；切换 appearance 与 flavor 可预览日间·夜间与日常柔和·技术硬核。黑描边与硬阴影保留 neo 力度。",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "0PQoR",
+      "x": 1240,
+      "y": 0,
+      "name": "对照 · dual flavor",
+      "width": 460,
+      "height": 400,
+      "fill": "#fffbf7ff",
+      "cornerRadius": 14,
+      "stroke": {
+        "thickness": 2,
+        "fill": "#141820ff"
+      },
+      "layout": "vertical",
+      "gap": 18,
+      "padding": 22,
+      "children": [
+        {
+          "type": "text",
+          "id": "W0R9G",
+          "fill": "#1e2433ff",
+          "content": "变量轴 · appearance × flavor",
+          "fontFamily": "DM Sans",
+          "fontSize": 14,
+          "fontWeight": "800"
+        },
+        {
+          "type": "frame",
+          "id": "JY1c2",
+          "name": "tblock",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "children": [
+            {
+              "type": "text",
+              "id": "pJ8VW",
+              "fill": "#475569ff",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "technical：Roboto Mono · 直角 pill · 更强描边/阴影 · 冷色底",
+              "fontFamily": "DM Sans",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "dbiGd",
+          "name": "row1",
+          "gap": 10,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "HkDxG",
+              "name": "p1",
+              "fill": "#1d4ed8ff",
+              "cornerRadius": 2,
+              "stroke": {
+                "thickness": 2,
+                "fill": "#0b1220ff"
+              },
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#0b1020ff",
+                "offset": {
+                  "x": 6,
+                  "y": 6
+                }
+              },
+              "padding": [
+                10,
+                16
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "8swNe",
+                  "fill": "#f8fafcff",
+                  "content": "TECHNICAL",
+                  "fontFamily": "Roboto Mono",
+                  "fontSize": 12,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "QBi7j",
+              "fill": "#0f172aff",
+              "content": "// build · perf · toolchain",
+              "fontFamily": "Roboto Mono",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "nIwgV",
+          "name": "eblock",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "children": [
+            {
+              "type": "text",
+              "id": "sBeDt",
+              "fill": "#475569ff",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "everyday：DM Sans · 大圆角 pill · 轻阴影 · 暖 pastel 卡片",
+              "fontFamily": "DM Sans",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "3w0Gv",
+          "name": "row2",
+          "gap": 10,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "tdCa3",
+              "name": "p2",
+              "fill": "#5e6ad2ff",
+              "cornerRadius": 22,
+              "stroke": {
+                "thickness": 2,
+                "fill": "#141820ff"
+              },
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#141820ff",
+                "offset": {
+                  "x": 4,
+                  "y": 4
+                }
+              },
+              "padding": [
+                12,
+                20
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Qkc2v",
+                  "fill": "#fffbf7ff",
+                  "content": "Everyday",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "6q9Dc",
+              "fill": "#1e2433ff",
+              "content": "随笔 · 朋友 · 慢慢写",
+              "fontFamily": "DM Sans",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "Xtd5w",
+          "fill": "#64748bff",
+          "textGrowth": "fixed-width",
+          "width": "fill_container",
+          "content": "左侧画布纵向叠放四块：light+everyday／light+technical／dark+everyday／dark+technical。变量矩阵已写入；每个画板根节点已设 theme 以切换解析。落地代码时用 appearance + flavor 映射到 CSS 变量即可。",
+          "fontFamily": "DM Sans",
+          "fontSize": 11,
+          "fontWeight": "normal"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "gYKEJ",
+      "x": 0,
+      "y": 700,
+      "name": "light · technical（硬核）",
+      "theme": {
+        "appearance": "light",
+        "flavor": "technical"
+      },
+      "width": 1200,
+      "height": 680,
+      "fill": "$background",
+      "cornerRadius": "$radius-frame",
+      "stroke": {
+        "thickness": "$shell-stroke",
+        "fill": "$border-color"
+      },
+      "effect": {
+        "type": "shadow",
+        "shadowType": "outer",
+        "color": "$shadow-tint",
+        "offset": {
+          "x": "$shadow-x",
+          "y": "$shadow-y"
+        }
+      },
+      "children": [
+        {
+          "type": "frame",
+          "id": "eQazg",
+          "name": "sidebar",
+          "width": 272,
+          "height": "fill_container",
+          "fill": "$bg",
+          "stroke": {
+            "thickness": {
+              "right": "$shell-stroke"
+            },
+            "fill": "$border-color"
+          },
+          "layout": "vertical",
+          "gap": 28,
+          "padding": [
+            32,
+            28
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "mhN0o",
+              "name": "brand",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 18,
+              "children": [
+                {
+                  "type": "rectangle",
+                  "cornerRadius": "$radius-avatar",
+                  "id": "WRwO7",
+                  "name": "avatar",
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 125,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "$dawn",
+                        "position": 0
+                      },
+                      {
+                        "color": "$main",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 96,
+                  "height": 96,
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  }
+                },
+                {
+                  "type": "text",
+                  "id": "g3liB",
+                  "name": "siteTitle",
+                  "fill": "$foreground",
+                  "content": "à demain",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 30,
+                  "fontWeight": "$font-weight-title",
+                  "letterSpacing": -0.3
+                },
+                {
+                  "type": "text",
+                  "id": "rYFuC",
+                  "name": "tagline",
+                  "fill": "$muted",
+                  "content": "明天见 · 慢慢写字",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "77wCi",
+              "name": "nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "8wiNW",
+                  "fill": "$foreground",
+                  "content": "归档",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "fz1Th",
+                  "fill": "$foreground",
+                  "content": "标签",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "I8IWZ",
+                  "fill": "$foreground",
+                  "content": "好友",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "d2WWy",
+                  "fill": "$foreground",
+                  "content": "关于",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "giUKC",
+          "name": "main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "fill": "$background",
+          "layout": "vertical",
+          "gap": 22,
+          "padding": [
+            28,
+            36,
+            36,
+            36
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "Udbi6",
+              "name": "toolbar",
+              "gap": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Rcyii",
+                  "name": "pillTech",
+                  "fill": "$main",
+                  "cornerRadius": "$radius-pill",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "padding": [
+                    12,
+                    20
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "9dUcz",
+                      "fill": "$main-foreground",
+                      "content": "TECHNICAL",
+                      "fontFamily": "Roboto Mono",
+                      "fontSize": 15,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.6
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "hxgah",
+                  "name": "pillDay",
+                  "fill": "$pill-inactive",
+                  "cornerRadius": "$radius-pill",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "padding": [
+                    12,
+                    20
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "k0C1u",
+                      "fill": "$foreground",
+                      "content": "Everyday",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "zgoWG",
+              "name": "hr",
+              "fill": "$main",
+              "width": "fill_container",
+              "height": 4
+            },
+            {
+              "type": "frame",
+              "id": "TBZPD",
+              "name": "cards",
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": 18,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "6hkmi",
+                  "name": "c1",
+                  "width": "fill_container",
+                  "fill": "$dawn",
+                  "cornerRadius": "$radius-card",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 22,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "hBR2T",
+                      "fill": "$foreground",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "晨间速记：把念头留给明天",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 21,
+                      "fontWeight": "$font-weight-title"
+                    },
+                    {
+                      "type": "text",
+                      "id": "tSVcO",
+                      "fill": "$body-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "留给下一个清晨再读，不在夜里赶稿——这就是 à demain。",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "KiWxV",
+                  "name": "c2",
+                  "width": "fill_container",
+                  "fill": "$noon",
+                  "cornerRadius": "$radius-card",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 22,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "l8Hi4",
+                      "fill": "$foreground",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "白天搭建：工程与实践",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 21,
+                      "fontWeight": "$font-weight-title"
+                    },
+                    {
+                      "type": "text",
+                      "id": "t3tHS",
+                      "fill": "$body-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "技术向长文与工具链复盘，像午后光线一样扎实、清楚。",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "50Yoz",
+                  "name": "c3",
+                  "width": "fill_container",
+                  "fill": "$blue-hour",
+                  "cornerRadius": "$radius-card",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 22,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "sZ2eH",
+                      "fill": "$foreground",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "暮色归档：标签与友人",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 21,
+                      "fontWeight": "$font-weight-title"
+                    },
+                    {
+                      "type": "text",
+                      "id": "OOaUA",
+                      "fill": "$body-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "标签、友链与关于页，收束成日后还能轻轻翻到的索引。",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "w8FzS",
+                  "name": "c4",
+                  "width": "fill_container",
+                  "fill": "$dusk",
+                  "cornerRadius": "$radius-card",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 22,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "9glYV",
+                      "fill": "$foreground",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "从黎明到蓝调时刻",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 21,
+                      "fontWeight": "$font-weight-title"
+                    },
+                    {
+                      "type": "text",
+                      "id": "05Wcj",
+                      "fill": "$body-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "暖纸白 / 雾紫侧栏 + 四张时间卡片；切换 appearance 与 flavor 可预览日间·夜间与日常柔和·技术硬核。黑描边与硬阴影保留 neo 力度。",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "zHw6c",
+      "x": 0,
+      "y": 1400,
+      "name": "dark · everyday（柔和夜）",
+      "theme": {
+        "appearance": "dark",
+        "flavor": "everyday"
+      },
+      "width": 1200,
+      "height": 680,
+      "fill": "$background",
+      "cornerRadius": "$radius-frame",
+      "stroke": {
+        "thickness": "$shell-stroke",
+        "fill": "$border-color"
+      },
+      "effect": {
+        "type": "shadow",
+        "shadowType": "outer",
+        "color": "$shadow-tint",
+        "offset": {
+          "x": "$shadow-x",
+          "y": "$shadow-y"
+        }
+      },
+      "children": [
+        {
+          "type": "frame",
+          "id": "W6kuP",
+          "name": "sidebar",
+          "width": 272,
+          "height": "fill_container",
+          "fill": "$bg",
+          "stroke": {
+            "thickness": {
+              "right": "$shell-stroke"
+            },
+            "fill": "$border-color"
+          },
+          "layout": "vertical",
+          "gap": 28,
+          "padding": [
+            32,
+            28
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "r44yB",
+              "name": "brand",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 18,
+              "children": [
+                {
+                  "type": "rectangle",
+                  "cornerRadius": "$radius-avatar",
+                  "id": "VQeZ5",
+                  "name": "avatar",
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 125,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "$dawn",
+                        "position": 0
+                      },
+                      {
+                        "color": "$main",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 96,
+                  "height": 96,
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  }
+                },
+                {
+                  "type": "text",
+                  "id": "rpCsJ",
+                  "name": "siteTitle",
+                  "fill": "$foreground",
+                  "content": "à demain",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 30,
+                  "fontWeight": "$font-weight-title",
+                  "letterSpacing": -0.3
+                },
+                {
+                  "type": "text",
+                  "id": "XN5uF",
+                  "name": "tagline",
+                  "fill": "$muted",
+                  "content": "明天见 · 慢慢写字",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "UkWe3",
+              "name": "nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "H3hw0",
+                  "fill": "$foreground",
+                  "content": "归档",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "iiFeo",
+                  "fill": "$foreground",
+                  "content": "标签",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "COXaq",
+                  "fill": "$foreground",
+                  "content": "好友",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "qWsad",
+                  "fill": "$foreground",
+                  "content": "关于",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "uza5o",
+          "name": "main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "fill": "$background",
+          "layout": "vertical",
+          "gap": 22,
+          "padding": [
+            28,
+            36,
+            36,
+            36
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "jJQmr",
+              "name": "toolbar",
+              "gap": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "56IV3",
+                  "name": "pillTech",
+                  "fill": "$pill-inactive",
+                  "cornerRadius": "$radius-pill",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "padding": [
+                    12,
+                    20
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "VjDNj",
+                      "fill": "$foreground",
+                      "content": "TECHNICAL",
+                      "fontFamily": "Roboto Mono",
+                      "fontSize": 15,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.6
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "DLTkY",
+                  "name": "pillDay",
+                  "fill": "$main",
+                  "cornerRadius": "$radius-pill",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "padding": [
+                    12,
+                    20
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "L7w7M",
+                      "fill": "$main-foreground",
+                      "content": "Everyday",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "XdqiF",
+              "name": "hr",
+              "fill": "$main",
+              "width": "fill_container",
+              "height": 4
+            },
+            {
+              "type": "frame",
+              "id": "xedTh",
+              "name": "cards",
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": 18,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "mUyOx",
+                  "name": "c1",
+                  "width": "fill_container",
+                  "fill": "$dawn",
+                  "cornerRadius": "$radius-card",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 22,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "2SXKu",
+                      "fill": "$foreground",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "晨间速记：把念头留给明天",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 21,
+                      "fontWeight": "$font-weight-title"
+                    },
+                    {
+                      "type": "text",
+                      "id": "l9pJO",
+                      "fill": "$body-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "留给下一个清晨再读，不在夜里赶稿——这就是 à demain。",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "dhqmC",
+                  "name": "c2",
+                  "width": "fill_container",
+                  "fill": "$noon",
+                  "cornerRadius": "$radius-card",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 22,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "KXEqN",
+                      "fill": "$foreground",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "白天搭建：工程与实践",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 21,
+                      "fontWeight": "$font-weight-title"
+                    },
+                    {
+                      "type": "text",
+                      "id": "JkOvH",
+                      "fill": "$body-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "技术向长文与工具链复盘，像午后光线一样扎实、清楚。",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "QDVFh",
+                  "name": "c3",
+                  "width": "fill_container",
+                  "fill": "$blue-hour",
+                  "cornerRadius": "$radius-card",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 22,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "IdsEi",
+                      "fill": "$foreground",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "暮色归档：标签与友人",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 21,
+                      "fontWeight": "$font-weight-title"
+                    },
+                    {
+                      "type": "text",
+                      "id": "w5OnE",
+                      "fill": "$body-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "标签、友链与关于页，收束成日后还能轻轻翻到的索引。",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "c8gn9",
+                  "name": "c4",
+                  "width": "fill_container",
+                  "fill": "$dusk",
+                  "cornerRadius": "$radius-card",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 22,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "smJxQ",
+                      "fill": "$foreground",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "从黎明到蓝调时刻",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 21,
+                      "fontWeight": "$font-weight-title"
+                    },
+                    {
+                      "type": "text",
+                      "id": "uBzGd",
+                      "fill": "$body-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "暖纸白 / 雾紫侧栏 + 四张时间卡片；切换 appearance 与 flavor 可预览日间·夜间与日常柔和·技术硬核。黑描边与硬阴影保留 neo 力度。",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "k0iCL",
+      "x": 0,
+      "y": 2100,
+      "name": "dark · technical（终端夜）",
+      "theme": {
+        "appearance": "dark",
+        "flavor": "technical"
+      },
+      "width": 1200,
+      "height": 680,
+      "fill": "$background",
+      "cornerRadius": "$radius-frame",
+      "stroke": {
+        "thickness": "$shell-stroke",
+        "fill": "$border-color"
+      },
+      "effect": {
+        "type": "shadow",
+        "shadowType": "outer",
+        "color": "$shadow-tint",
+        "offset": {
+          "x": "$shadow-x",
+          "y": "$shadow-y"
+        }
+      },
+      "children": [
+        {
+          "type": "frame",
+          "id": "ujNWV",
+          "name": "sidebar",
+          "width": 272,
+          "height": "fill_container",
+          "fill": "$bg",
+          "stroke": {
+            "thickness": {
+              "right": "$shell-stroke"
+            },
+            "fill": "$border-color"
+          },
+          "layout": "vertical",
+          "gap": 28,
+          "padding": [
+            32,
+            28
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "wesbp",
+              "name": "brand",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 18,
+              "children": [
+                {
+                  "type": "rectangle",
+                  "cornerRadius": "$radius-avatar",
+                  "id": "q5DDr",
+                  "name": "avatar",
+                  "fill": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 125,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "$dawn",
+                        "position": 0
+                      },
+                      {
+                        "color": "$main",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "width": 96,
+                  "height": 96,
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  }
+                },
+                {
+                  "type": "text",
+                  "id": "4Gw3U",
+                  "name": "siteTitle",
+                  "fill": "$foreground",
+                  "content": "à demain",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 30,
+                  "fontWeight": "$font-weight-title",
+                  "letterSpacing": -0.3
+                },
+                {
+                  "type": "text",
+                  "id": "RfyFC",
+                  "name": "tagline",
+                  "fill": "$muted",
+                  "content": "明天见 · 慢慢写字",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "vRFwA",
+              "name": "nav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "MXmCI",
+                  "fill": "$foreground",
+                  "content": "归档",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "frN3W",
+                  "fill": "$foreground",
+                  "content": "标签",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "1HK0U",
+                  "fill": "$foreground",
+                  "content": "好友",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "KrcxJ",
+                  "fill": "$foreground",
+                  "content": "关于",
+                  "fontFamily": "DM Sans",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "xs9GO",
+          "name": "main",
+          "width": "fill_container",
+          "height": "fill_container",
+          "fill": "$background",
+          "layout": "vertical",
+          "gap": 22,
+          "padding": [
+            28,
+            36,
+            36,
+            36
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "Bf6ob",
+              "name": "toolbar",
+              "gap": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "lywm3",
+                  "name": "pillTech",
+                  "fill": "$main",
+                  "cornerRadius": "$radius-pill",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "padding": [
+                    12,
+                    20
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "XfulN",
+                      "fill": "$main-foreground",
+                      "content": "TECHNICAL",
+                      "fontFamily": "Roboto Mono",
+                      "fontSize": 15,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.6
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "oW2M2",
+                  "name": "pillDay",
+                  "fill": "$pill-inactive",
+                  "cornerRadius": "$radius-pill",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "padding": [
+                    12,
+                    20
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Kp5nS",
+                      "fill": "$foreground",
+                      "content": "Everyday",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "5gxYP",
+              "name": "hr",
+              "fill": "$main",
+              "width": "fill_container",
+              "height": 4
+            },
+            {
+              "type": "frame",
+              "id": "Ax9LN",
+              "name": "cards",
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": 18,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "3eKaM",
+                  "name": "c1",
+                  "width": "fill_container",
+                  "fill": "$dawn",
+                  "cornerRadius": "$radius-card",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 22,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "wxTwq",
+                      "fill": "$foreground",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "晨间速记：把念头留给明天",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 21,
+                      "fontWeight": "$font-weight-title"
+                    },
+                    {
+                      "type": "text",
+                      "id": "IRdiA",
+                      "fill": "$body-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "留给下一个清晨再读，不在夜里赶稿——这就是 à demain。",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "lNonW",
+                  "name": "c2",
+                  "width": "fill_container",
+                  "fill": "$noon",
+                  "cornerRadius": "$radius-card",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 22,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "RZZUL",
+                      "fill": "$foreground",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "白天搭建：工程与实践",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 21,
+                      "fontWeight": "$font-weight-title"
+                    },
+                    {
+                      "type": "text",
+                      "id": "D2wah",
+                      "fill": "$body-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "技术向长文与工具链复盘，像午后光线一样扎实、清楚。",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ye0zw",
+                  "name": "c3",
+                  "width": "fill_container",
+                  "fill": "$blue-hour",
+                  "cornerRadius": "$radius-card",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 22,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "QqvX1",
+                      "fill": "$foreground",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "暮色归档：标签与友人",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 21,
+                      "fontWeight": "$font-weight-title"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ukwgn",
+                      "fill": "$body-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "标签、友链与关于页，收束成日后还能轻轻翻到的索引。",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "xIkxw",
+                  "name": "c4",
+                  "width": "fill_container",
+                  "fill": "$dusk",
+                  "cornerRadius": "$radius-card",
+                  "stroke": {
+                    "thickness": "$card-stroke",
+                    "fill": "$border-color"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "$shadow-tint",
+                    "offset": {
+                      "x": "$shadow-x",
+                      "y": "$shadow-y"
+                    }
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 22,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "pV0XU",
+                      "fill": "$foreground",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "从黎明到蓝调时刻",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 21,
+                      "fontWeight": "$font-weight-title"
+                    },
+                    {
+                      "type": "text",
+                      "id": "jv4hY",
+                      "fill": "$body-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "暖纸白 / 雾紫侧栏 + 四张时间卡片；切换 appearance 与 flavor 可预览日间·夜间与日常柔和·技术硬核。黑描边与硬阴影保留 neo 力度。",
+                      "fontFamily": "DM Sans",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "themes": {
+    "appearance": [
+      "light",
+      "dark"
+    ],
+    "flavor": [
+      "everyday",
+      "technical"
+    ]
+  },
+  "variables": {
+    "background": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#fffbf7ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#eef2f7ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": "#141a24ff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#0a0e14ff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "bg": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#ece8f8ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#dfe7f2ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": "#1c2436ff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#111920ff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "border-color": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#141820ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#0b1220ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": "#cbd5e1ff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#22d3eeff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "border-width": {
+      "type": "number",
+      "value": 2
+    },
+    "font-family": {
+      "type": "string",
+      "value": "DM Sans"
+    },
+    "font-size-base": {
+      "type": "number",
+      "value": 16
+    },
+    "font-size-lg": {
+      "type": "number",
+      "value": 20
+    },
+    "font-size-sm": {
+      "type": "number",
+      "value": 14
+    },
+    "font-size-xl": {
+      "type": "number",
+      "value": 28
+    },
+    "foreground": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#1e2433ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#0f172aff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": "#e8edf7ff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#d1fae5ff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "main": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#5e6ad2ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#1d4ed8ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": "#a78bfaff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#22d3eeff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "main-foreground": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#fffbf7ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#f8fafcff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": "#0f172aff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#041016ff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "radius": {
+      "type": "number",
+      "value": 6
+    },
+    "shadow-x": {
+      "type": "number",
+      "value": [
+        {
+          "value": 4,
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": 6,
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": 4,
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": 6,
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "shadow-y": {
+      "type": "number",
+      "value": [
+        {
+          "value": 4,
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": 6,
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": 4,
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": 6,
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "blue-hour": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#c8d9ffff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#a8c8ffff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": "#2a3348ff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#152238ff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "dawn": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#ffd8b8ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#c8d4e8ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": "#3d2f28ff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#1e2a38ff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "dusk": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#e4d4f5ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#d4d0f8ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": "#322a40ff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#221c34ff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "muted": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#5c6578ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#475569ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": "#94a3b8ff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#64748bff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "noon": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#ffe9a8ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#bfe8d8ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": "#3d3524ff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#1a2f2aff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "body-muted": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#5c6578e6",
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#475569e6",
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": "#94a3b8e0",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#7dd3fce0",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "card-stroke": {
+      "type": "number",
+      "value": [
+        {
+          "value": 2,
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": 3,
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": 2,
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": 3,
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "font-ui": {
+      "type": "string",
+      "value": [
+        {
+          "value": "DM Sans",
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "Roboto Mono",
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": "DM Sans",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "Roboto Mono",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "font-weight-title": {
+      "type": "string",
+      "value": [
+        {
+          "value": "800",
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "700",
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": "800",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "700",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "pill-inactive": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#fff0e8ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#e2e8f0ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": "#252b3dff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#15202bff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "radius-avatar": {
+      "type": "number",
+      "value": [
+        {
+          "value": 12,
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": 4,
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": 12,
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": 4,
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "radius-card": {
+      "type": "number",
+      "value": [
+        {
+          "value": 12,
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": 3,
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": 12,
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": 2,
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "radius-frame": {
+      "type": "number",
+      "value": [
+        {
+          "value": 14,
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": 6,
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": 14,
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": 4,
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "radius-pill": {
+      "type": "number",
+      "value": [
+        {
+          "value": 22,
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": 2,
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": 22,
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": 2,
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "shadow-tint": {
+      "type": "color",
+      "value": [
+        {
+          "value": "#141820ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#0b1020ff",
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": "#000000cc",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": "#000000ff",
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    },
+    "shell-stroke": {
+      "type": "number",
+      "value": [
+        {
+          "value": 2,
+          "theme": {
+            "appearance": "light",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": 3,
+          "theme": {
+            "appearance": "light",
+            "flavor": "technical"
+          }
+        },
+        {
+          "value": 2,
+          "theme": {
+            "appearance": "dark",
+            "flavor": "everyday"
+          }
+        },
+        {
+          "value": 3,
+          "theme": {
+            "appearance": "dark",
+            "flavor": "technical"
+          }
+        }
+      ]
+    }
+  }
+}
