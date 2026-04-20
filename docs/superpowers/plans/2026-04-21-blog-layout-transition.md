@@ -124,8 +124,7 @@ test('direct URL to /categories renders browse layout, no intro card', async ({ 
 - [ ] **Step 2: Run tests — verify all fail**
 
 ```bash
-pnpm dev &   # start dev server in background
-pnpm test
+pnpm test:e2e
 ```
 
 Expected: all tests FAIL (elements not found, layouts not yet implemented).
@@ -317,7 +316,7 @@ const { title } = Astro.props
 - [ ] **Step 2: Run the intro-related tests**
 
 ```bash
-pnpm test --grep "/ shows centered"
+pnpm test:e2e --grep "/ shows centered"
 ```
 
 Expected: PASS (the profile-card element is now present with correct testid).
@@ -538,7 +537,7 @@ const { title } = Astro.props
 - [ ] **Step 2: Run browse-related tests**
 
 ```bash
-pnpm test --grep "/posts"
+pnpm test:e2e --grep "/posts"
 ```
 
 Expected: tests for sidebar presence and view-transition-name may still fail because `posts.astro` hasn't been updated yet. That's expected.
@@ -573,7 +572,7 @@ The `IntroLayout` renders the profile card directly — no longer needs `Header`
 - [ ] **Step 2: Run intro tests**
 
 ```bash
-pnpm test --grep "^\/"
+pnpm test:e2e --grep "^\/"
 ```
 
 Expected: all intro tests PASS.
@@ -661,7 +660,7 @@ import BrowseLayout from '../layouts/BrowseLayout.astro'
 - [ ] **Step 6: Run all browse tests**
 
 ```bash
-pnpm test --grep "browse|sidebar|/posts|/categories"
+pnpm test:e2e --grep "browse|sidebar|/posts|/categories"
 ```
 
 Expected: all tests PASS.
@@ -791,10 +790,10 @@ git commit -m "feat: add scale animation for profile-card View Transition"
 - [ ] **Step 1: Run all tests**
 
 ```bash
-pnpm test
+pnpm test:all
 ```
 
-Expected: all 11 tests PASS.
+Expected: all 11 E2E tests PASS.
 
 - [ ] **Step 2: Build to verify no type errors**
 

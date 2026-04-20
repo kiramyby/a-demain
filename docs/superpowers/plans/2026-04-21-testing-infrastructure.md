@@ -79,7 +79,6 @@ test('dev server is reachable', async ({ page }) => {
 - [ ] **Step 4: Run smoke test**
 
 ```bash
-pnpm dev &
 pnpm exec playwright test tests/e2e/smoke.test.ts
 ```
 
@@ -104,10 +103,10 @@ git commit -m "chore: add Playwright for E2E testing"
 - Modify: `package.json`
 - Create: `vitest.config.ts`
 
-- [ ] **Step 1: Install Vitest**
+- [ ] **Step 1: Install Vitest and type checker**
 
 ```bash
-pnpm add -D vitest
+pnpm add -D vitest @astrojs/check typescript
 ```
 
 - [ ] **Step 2: Create `vitest.config.ts`**
@@ -204,21 +203,17 @@ git commit -m "chore: add unified test scripts"
 ## Task 4: Add test utilities
 
 **Files:**
-- Create: `tests/utils.ts` — shared helpers for both test layers
+- Create: `tests/unit/fixtures.ts` — unit test fixtures (not shared with E2E)
 
-Shared utilities avoid duplication when multiple test files need the same setup.
+Keeping fixtures under `tests/unit/` makes the scope clear — E2E tests don't use mock data, they hit the actual dev server.
 
-- [ ] **Step 1: Create `tests/utils.ts`**
+- [ ] **Step 1: Create `tests/unit/fixtures.ts`**
 
 ```typescript
-// Vitest helper: creates a mock Notion BlogPost for unit tests
-export function mockPost(overrides: Partial<{
-  id: string
-  title: string
-  slug: string
-  status: string
-  publishedDate: string
-}> = {}) {
+import type { BlogPost } from '@/server/notion'
+
+// Creates a mock BlogPost for unit tests; type-checked against the real type.
+export function mockPost(overrides: Partial<BlogPost> = {}): BlogPost {
   return {
     id: 'test-id',
     title: 'Test Post',
@@ -243,7 +238,7 @@ export function mockPost(overrides: Partial<{
 ```typescript
 // tests/unit/mock-helper.test.ts
 import { describe, it, expect } from 'vitest'
-import { mockPost } from '../utils'
+import { mockPost } from './fixtures'
 
 describe('mockPost', () => {
   it('returns a post with default values', () => {
@@ -275,7 +270,7 @@ Test Files  2 passed (2)
 - [ ] **Step 4: Commit**
 
 ```bash
-git add tests/utils.ts tests/unit/mock-helper.test.ts
+git add tests/unit/fixtures.ts tests/unit/mock-helper.test.ts
 git commit -m "chore: add shared test utilities and mock helpers"
 ```
 
