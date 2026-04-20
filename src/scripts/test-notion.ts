@@ -3,7 +3,7 @@
  * 运行: pnpm tsx src/scripts/test-notion.ts
  */
 
-import { getAllPosts, getAllFriends } from "../lib/notion";
+import { getAllPosts, getAllFriends } from "../server/notion/notion";
 
 console.log("🔍 测试 Notion API 连接（2025-09-03 版本）\n");
 
