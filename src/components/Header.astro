@@ -1,24 +1,24 @@
 ---
-
+import { SITE_CONFIG } from "../config";
 ---
 
-<header class="fixed top-0 left-0 right-0 flex justify-between items-center py-5 px-20 bg-white" style="z-index: var(--z-header);">
-    <div class="text-xl font-semibold">
-        <a href="/" title="Kiracoon's Blog">
-            Kiracoon's Blog
-        </a>
-    </div>
+<header
+  class="fixed top-0 left-0 right-0 z-20 mx-auto flex justify-between items-center py-2 px-20 border-b-3 border-border bg-secondary-background"
+>
+  <div class="text-lg font-semibold">
+    <a href="/" title="Kiracoon's Blog">
+      {SITE_CONFIG.siteName}
+    </a>
+  </div>
 
-    <nav class="font-medium">
-        <ul class="flex space-x-6">
-            <li><a href="/">Home</a></li>
-            <li><a href="/posts/">Post</a></li>
-            <li><a href="/categories/">Category</a></li>
-            <li><a href="/tags/">Tag</a></li>
-            <li><a href="/friends/">Friend</a></li>
-            <li><a href="/about/">About</a></li>
-        </ul>
-    
-    </nav>
-
+  <nav class="text-sm font-medium">
+    <ul class="flex space-x-6">
+      <li><a href="/">Home</a></li>
+      <li><a href="/posts/">Post</a></li>
+      <li><a href="/categories/">Category</a></li>
+      <li><a href="/tags/">Tag</a></li>
+      <li><a href="/friends/">Friend</a></li>
+      <li><a href="/about/">About</a></li>
+    </ul>
+  </nav>
 </header>

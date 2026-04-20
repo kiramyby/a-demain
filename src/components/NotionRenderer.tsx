@@ -1,7 +1,7 @@
 import { NotionRenderer as ReactNotionRenderer } from "react-notion-x";
 import type { ExtendedRecordMap } from "notion-types";
-import type { BlogPost } from "../lib/notion";
-import { getSlugByPageId } from "../lib/notion-page-map";
+import type { BlogPost } from "../server/notion/notion";
+import { getSlugByPageId } from "../server/notion/notion-page-map";
 import { lazy, Suspense } from "react";
 
 // 高级功能组件 - 懒加载优化

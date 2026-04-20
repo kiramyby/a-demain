@@ -2,23 +2,29 @@
 import { Icon } from "astro-icon/components";
 import { SITE_CONFIG } from "../../../config";
 ---
-<div class="bg-white p-20 rounded-xl w-full max-w-md text-center">
-<div class="mb-8">
-    <a href="/about" title="Click for More Info">
-        <img alt="Kira's Avatar" class="rounded-full w-32 h-32 mx-auto mb-4" 
-        src={SITE_CONFIG.author.avatarUrl}/>
+
+<div
+  class="bg-secondary-background p-20 rounded-xl w-full max-w-md text-center border-3"
+>
+  <div>
+    <a href="/about" class="inline-block mb-4 rounded-full">
+      <img
+        alt="Kira's Avatar"
+        class="rounded-full w-32 h-32 block border-3"
+        src={SITE_CONFIG.author.avatarUrl}
+      />
     </a>
-</div>
-<div>
-    <p class="text-2xl font-semibold mb-4">{SITE_CONFIG.author.name}</p>
-    <p class="mb-4">{SITE_CONFIG.author.bio}</p>
-</div>
-<div class="flex justify-center space-x-4">
-    <a href={SITE_CONFIG.social.github} aria-label="GitHub">
-        <Icon slot="github" name="mdi:github" size={"32"}/>
-    </a>
-    <a href={SITE_CONFIG.social.x} aria-label="Twitter">
-        <Icon slot="twitter" name="mdi:twitter" size={"32"}/>
-    </a>
-</div>
+    <div>
+      <p class="text-2xl font-semibold mb-4">{SITE_CONFIG.author.name}</p>
+      <p class="text-sm mb-4">{SITE_CONFIG.author.bio}</p>
+    </div>
+    <div class="flex justify-center space-x-4">
+      <a href={SITE_CONFIG.social.github} aria-label="GitHub">
+        <Icon slot="github" name="lucide:github" size={"32"} />
+      </a>
+      <a href={SITE_CONFIG.social.x} aria-label="Twitter">
+        <Icon slot="twitter" name="lucide:twitter" size={"32"} />
+      </a>
+    </div>
+  </div>
 </div>
