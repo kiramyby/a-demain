@@ -1,24 +1,29 @@
 ---
 import { Icon } from "astro-icon/components";
 import { SITE_CONFIG } from "../../../config";
+import { Badge } from "@/components/ui/badge";
 ---
 
 <div
-  class="bg-secondary-background p-20 rounded-xl w-full max-w-md text-center border-3"
+  class="relative bg-secondary-background p-20 rounded-base w-full max-w-md text-center text-main-foreground border-2 border-border shadow-shadow transition-all hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none"
 >
+  <Badge className="absolute -top-3 -right-3"> ↙ Click to Start </Badge>
   <div>
-    <a href="/about" class="inline-block mb-4 rounded-full">
-      <img
-        alt="Kira's Avatar"
-        class="rounded-full w-32 h-32 block border-3"
-        src={SITE_CONFIG.author.avatarUrl}
-      />
-    </a>
+    <img
+      alt="Kira's Avatar"
+      class="rounded-full w-32 h-32 block border-3 mb-4 mx-auto"
+      src={SITE_CONFIG.author.avatarUrl}
+    />
     <div>
-      <p class="text-2xl font-semibold mb-4">{SITE_CONFIG.author.name}</p>
+      <a
+        href="/posts"
+        class="text-2xl font-semibold mb-4 after:absolute after:inset-0"
+      >
+        {SITE_CONFIG.author.name}
+      </a>
       <p class="text-sm mb-4">{SITE_CONFIG.author.bio}</p>
     </div>
-    <div class="flex justify-center space-x-4">
+    <div class="relative z-10 flex justify-center space-x-4">
       <a href={SITE_CONFIG.social.github} aria-label="GitHub">
         <Icon slot="github" name="lucide:github" size={"32"} />
       </a>
