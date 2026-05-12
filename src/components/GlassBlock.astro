@@ -1,0 +1,23 @@
+---
+import { SITE_CONFIG } from "../config";
+import { Image } from "astro:assets";
+
+const words = SITE_CONFIG.siteName.split(" ");
+---
+
+<div
+  class="flex flex-col glass-block border-border shadow w-32 h-64 mx-auto bg-gray-100"
+>
+  <Image
+    alt="Kira's Avatar"
+    class="rounded-full w-18 h-18 block border-3 mb-4 mx-auto"
+    src={SITE_CONFIG.author.avatarUrl}
+    width={80}
+    height={80}
+  />
+  {
+    words.map((word) => {
+      return <span>{word}</span>;
+    })
+  }
+</div>

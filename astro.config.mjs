@@ -19,6 +19,10 @@ export default defineConfig({
 		},
 	},
 
+	image: {
+		domains: ["gravatar.com"],
+	},
+
 	integrations: [react(), icon()],
 
 	vite: {

@@ -1,0 +1,22 @@
+---
+import NavBar from "@/components/NavBar.astro";
+import Footer from "@/components/Footer.astro";
+import Layout from "./Layout.astro";
+import "../styles/global.css";
+---
+
+<Layout>
+  <div
+    class="mx-auto h-full lg:grid lg:gap-x-6 lg:grid-cols-[1fr_3fr] lg:grid-rows-[1fr_auto] flex flex-col"
+  >
+    <header class="lg:mt-16 lg:mb-2 lg:row-[1/2] lg:col-[1/2] lg:mx-auto">
+      <NavBar />
+    </header>
+    <main class="lg:row-[1/3] lg:col-[2/3] flex-1 content-center">
+      <slot />
+    </main>
+    <footer class="lg:mb-6 lg:row-[2/3] lg:col-[1/2] lg:mx-auto">
+      <Footer />
+    </footer>
+  </div>
+</Layout>
