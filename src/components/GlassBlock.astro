@@ -1,16 +1,18 @@
 ---
 import { SITE_CONFIG } from "../config";
 import { Image } from "astro:assets";
+import { Button } from "./ui/button";
 
 const words = SITE_CONFIG.siteName.split(" ");
 ---
 
-<div
-  class="flex flex-col glass-block border-border shadow w-32 h-64 mx-auto bg-gray-100"
+<Button
+  variant="noShadow"
+  className="border-0 flex flex-col glass-block w-full h-64 bg-gray-100 items-center"
 >
   <Image
     alt="Kira's Avatar"
-    class="rounded-full w-18 h-18 block border-3 mb-4 mx-auto"
+    class="rounded-full w-18 h-18 block border-3 mb-4"
     src={SITE_CONFIG.author.avatarUrl}
     width={80}
     height={80}
@@ -20,4 +22,4 @@ const words = SITE_CONFIG.siteName.split(" ");
       return <span>{word}</span>;
     })
   }
-</div>
+</Button>
