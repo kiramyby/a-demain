@@ -11,17 +11,20 @@ import { Button } from "./ui/button";
     <GlassBlock />
   </div>
 
-  <div class="text-sm font-medium text-center lg:my-8">
+  <div class="text-sm font-medium text-center content-center lg:my-8">
     <ul class="flex flex-row lg:flex-col lg:gap-4 gap-2">
       <li>
-        <a href="/categories/"><Button className="min-w-24">Category</Button></a
+        <a href="/posts/"><Button className="lg:min-w-24">Post</Button></a>
+      </li>
+      <li>
+        <a href="/categories/"
+          ><Button className="lg:min-w-24">Category</Button></a
         >
       </li>
-      <li><a href="/tags/"><Button className="min-w-24">Tag</Button></a></li>
+      <li><a href="/tags/"><Button className="lg:min-w-24">Tag</Button></a></li>
       <li>
-        <a href="/friends/"><Button className="min-w-24">Friend</Button></a>
+        <a href="/about/"><Button className="lg:min-w-24">About</Button></a>
       </li>
-      <li><a href="/about/"><Button className="min-w-24">About</Button></a></li>
     </ul>
   </div>
 </nav>
