@@ -3,6 +3,7 @@ export const SITE_CONFIG = {
     name: 'Mik7r4 "Kirac0on" Kira',
     bio: "Web Dev | Cyber Security | Noob Writer",
     email: "kiramyby@gmail.com",
+    avatarStaticUrl: "./assets/avatar_pixel_s.jpg",
     avatarUrl:
       "https://gravatar.com/avatar/82c042f60d38e82d8084e8c100c4122e887bfc6960a8e28deb0f85e1e10b7f90?size=256",
   },
