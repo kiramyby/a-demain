@@ -1,0 +1,56 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import BrowseLayout from "@/layouts/BrowseLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+type Props = {
+  post: CollectionEntry<"posts">;
+};
+
+const { post } = Astro.props as Props;
+const { Content, headings } = await render(post);
+---
+
+<BrowseLayout>
+  <article class="px-6 py-10 lg:px-10">
+    <header class="mb-8">
+      <a href="/posts/" class="text-sm hover:underline">Posts</a>
+      <h1 class="mt-3 text-4xl font-bold">{post.data.title}</h1>
+      {post.data.description && <p class="mt-3">{post.data.description}</p>}
+      <div class="mt-4 flex flex-wrap gap-2 text-sm">
+        {post.data.category && (
+          <a href={`/categories/${encodeURIComponent(post.data.category)}/`}>
+            {post.data.category}
+          </a>
+        )}
+        {post.data.tags.map((tag) => (
+          <a href={`/tags/${encodeURIComponent(tag)}/`}>#{tag}</a>
+        ))}
+      </div>
+    </header>
+
+    {headings.length > 0 && (
+      <nav class="border-border mb-8 border-3 p-4">
+        <h2 class="font-bold">Contents</h2>
+        <ol class="mt-2 grid gap-1 text-sm">
+          {headings.map((heading) => (
+            <li>
+              <a href={`#${heading.slug}`}>{heading.text}</a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    )}
+
+    <div class="prose max-w-none">
+      <Content />
+    </div>
+  </article>
+</BrowseLayout>

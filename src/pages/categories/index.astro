@@ -1,11 +1,31 @@
 ---
+import { getCollection } from "astro:content";
 import BrowseLayout from "@/layouts/BrowseLayout.astro";
+
+const posts = await getCollection("posts");
+const categories = Array.from(
+  new Set(
+    posts
+      .map((post) => post.data.category)
+      .filter((category): category is string => Boolean(category)),
+  ),
+).sort();
 ---
 
 <BrowseLayout>
-  <article
-    class="posts-list bg-secondary-background border-border border-3 w-full h-full content-center text-center"
-  >
-    <h1 class="text-4xl font-bold">Categories Page</h1>
-  </article>
+  <section class="px-6 py-10 lg:px-10">
+    <h1 class="text-4xl font-bold">Categories</h1>
+    <div class="mt-8 flex flex-wrap gap-3">
+      {
+        categories.map((category) => (
+          <a
+            class="border-border border-3 px-4 py-2"
+            href={`/categories/${encodeURIComponent(category)}/`}
+          >
+            {category}
+          </a>
+        ))
+      }
+    </div>
+  </section>
 </BrowseLayout>

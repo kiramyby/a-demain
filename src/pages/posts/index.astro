@@ -1,7 +1,38 @@
 ---
+import { getCollection } from "astro:content";
 import BrowseLayout from "@/layouts/BrowseLayout.astro";
+
+const posts = (await getCollection("posts")).sort((a, b) => {
+  const left = a.data.publishedDate?.valueOf() ?? 0;
+  const right = b.data.publishedDate?.valueOf() ?? 0;
+  return right - left;
+});
 ---
 
 <BrowseLayout>
-  <h1 class="text-4xl font-bold">Posts Page</h1>
+  <section class="px-6 py-10 lg:px-10">
+    <h1 class="text-4xl font-bold">Posts</h1>
+    <div class="mt-8 grid gap-4">
+      {
+        posts.map((post) => (
+          <article class="border-border bg-secondary-background border-3 p-5">
+            <a class="text-2xl font-bold hover:underline" href={`/posts/${post.id}/`}>
+              {post.data.title}
+            </a>
+            <p class="mt-2 text-sm">{post.data.description}</p>
+            <div class="mt-4 flex flex-wrap gap-2 text-sm">
+              {post.data.category && (
+                <a href={`/categories/${encodeURIComponent(post.data.category)}/`}>
+                  {post.data.category}
+                </a>
+              )}
+              {post.data.tags.map((tag) => (
+                <a href={`/tags/${encodeURIComponent(tag)}/`}>#{tag}</a>
+              ))}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
 </BrowseLayout>
