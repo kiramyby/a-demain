@@ -50,10 +50,14 @@ export async function queryViewPages(
     throw new NotionQueryError(`Failed to query Notion view ${viewId}`, error)
   } finally {
     if (queryId) {
-      await client.request({
-        method: "delete",
-        path: `views/${viewId}/queries/${queryId}`,
-      })
+      try {
+        await client.request({
+          method: "delete",
+          path: `views/${viewId}/queries/${queryId}`,
+        })
+      } catch {
+        // Query cleanup is best-effort; preserve the primary query result or error.
+      }
     }
   }
 }

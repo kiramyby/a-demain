@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { tagHref } from "@/lib/content-routes";
 import BrowseLayout from "@/layouts/BrowseLayout.astro";
 
 const posts = await getCollection("posts");
@@ -12,7 +13,7 @@ const tags = Array.from(new Set(posts.flatMap((post) => post.data.tags))).sort()
     <div class="mt-8 flex flex-wrap gap-3">
       {
         tags.map((tag) => (
-          <a class="border-border border-3 px-4 py-2" href={`/tags/${encodeURIComponent(tag)}/`}>
+          <a class="border-border border-3 px-4 py-2" href={tagHref(tag)}>
             #{tag}
           </a>
         ))

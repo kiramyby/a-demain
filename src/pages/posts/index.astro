@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { categoryHref, tagHref } from "@/lib/content-routes";
 import BrowseLayout from "@/layouts/BrowseLayout.astro";
 
 const posts = (await getCollection("posts")).sort((a, b) => {
@@ -22,12 +23,12 @@ const posts = (await getCollection("posts")).sort((a, b) => {
             <p class="mt-2 text-sm">{post.data.description}</p>
             <div class="mt-4 flex flex-wrap gap-2 text-sm">
               {post.data.category && (
-                <a href={`/categories/${encodeURIComponent(post.data.category)}/`}>
+                <a href={categoryHref(post.data.category)}>
                   {post.data.category}
                 </a>
               )}
               {post.data.tags.map((tag) => (
-                <a href={`/tags/${encodeURIComponent(tag)}/`}>#{tag}</a>
+                <a href={tagHref(tag)}>#{tag}</a>
               ))}
             </div>
           </article>

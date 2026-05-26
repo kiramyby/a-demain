@@ -73,6 +73,21 @@ describe("queryViewPages", () => {
     })
   })
 
+  it("does not fail the view query when cleanup fails", async () => {
+    const request = vi
+      .fn()
+      .mockResolvedValueOnce({
+        object: "view_query",
+        id: "query-1",
+        results: [notionPostPage()],
+        next_cursor: null,
+        has_more: false,
+      })
+      .mockRejectedValueOnce(new Error("cleanup failed"))
+
+    await expect(queryViewPages({ request } as any, "view-1")).resolves.toHaveLength(1)
+  })
+
   it("wraps query failures", async () => {
     await expect(queryViewPages({ request: vi.fn().mockRejectedValue(new Error("boom")) } as any, "view-1")).rejects.toThrow(NotionQueryError)
   })

@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { categoryHref } from "@/lib/content-routes";
 import BrowseLayout from "@/layouts/BrowseLayout.astro";
 
 const posts = await getCollection("posts");
@@ -20,7 +21,7 @@ const categories = Array.from(
         categories.map((category) => (
           <a
             class="border-border border-3 px-4 py-2"
-            href={`/categories/${encodeURIComponent(category)}/`}
+            href={categoryHref(category)}
           >
             {category}
           </a>

@@ -103,4 +103,34 @@ describe("getPublishedPostMetas", () => {
 
     expect(request).toHaveBeenCalledTimes(2)
   })
+
+  it("does not memoize a failed post index load", async () => {
+    const request = vi
+      .fn()
+      .mockRejectedValueOnce(new Error("temporary network failure"))
+      .mockResolvedValueOnce({
+        id: "query-1",
+        results: [notionPostPage()],
+        next_cursor: null,
+        has_more: false,
+      })
+      .mockResolvedValueOnce({ deleted: true })
+
+    clearPostRepositoryCache()
+    await expect(
+      getPublishedPostMetas({
+        client: { request } as any,
+        config: { apiKey: "secret", postsDatabaseId: "db", postsViewId: "view-1" },
+      }),
+    ).rejects.toThrow()
+
+    await expect(
+      getPublishedPostMetas({
+        client: { request } as any,
+        config: { apiKey: "secret", postsDatabaseId: "db", postsViewId: "view-1" },
+      }),
+    ).resolves.toHaveLength(1)
+
+    expect(request).toHaveBeenCalledTimes(3)
+  })
 })

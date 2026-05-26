@@ -1,5 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
+import { termRouteParam } from "@/lib/content-routes";
 import BrowseLayout from "@/layouts/BrowseLayout.astro";
 
 export async function getStaticPaths() {
@@ -13,7 +14,7 @@ export async function getStaticPaths() {
   );
 
   return categories.map((category) => ({
-    params: { category },
+    params: { category: termRouteParam(category) },
     props: {
       category,
       posts: posts.filter((post) => post.data.category === category),
