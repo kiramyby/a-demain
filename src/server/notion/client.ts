@@ -12,4 +12,17 @@ export function createNotionClient(config: NotionConfig = readNotionConfig()): N
   })
 }
 
-export const notion = createNotionClient()
+let defaultClient: NotionClient | undefined
+
+export function getDefaultNotionClient(): NotionClient {
+  defaultClient ??= createNotionClient()
+  return defaultClient
+}
+
+export const notion = new Proxy({} as NotionClient, {
+  get(_target, property) {
+    const client = getDefaultNotionClient()
+    const value = client[property as keyof NotionClient]
+    return typeof value === "function" ? value.bind(client) : value
+  },
+})
