@@ -1,12 +1,49 @@
 # Notion Astro Content Design
 
 Date: 2026-05-26
+Status: Implemented on `main`
 
 ## Goal
 
 Use Notion as the editorial source for blog posts while making Astro the content system of record at build time.
 
 The site should treat Notion as a remote CMS and expose posts through Astro Content Collections. Astro pages should query `astro:content`, not call Notion directly.
+
+## Current Runtime Flow
+
+The implemented flow is build-time only:
+
+```txt
+Astro content sync
+  -> src/content.config.ts
+  -> notionPostsLoader()
+  -> getPublishedPostMetas()
+      -> read NOTION_* env
+      -> create @notionhq/client with notionVersion "2026-03-11"
+      -> if NOTION_POSTS_VIEW_ID exists:
+           query raw View Query API
+           POST /v1/views/{view_id}/queries
+           GET  /v1/views/{view_id}/queries/{query_id}
+           DELETE cleanup best-effort
+         else:
+           resolve data source
+           query dataSources.query()
+      -> map Notion page properties into BlogPostMeta
+  -> for each post:
+      -> pages.retrieveMarkdown({ page_id })
+      -> fail on truncated markdown or unknown block ids
+      -> normalize markdown and report Notion signed media URL warnings
+      -> parseData()
+      -> renderMarkdown()
+      -> store entry in posts collection by slug
+
+Astro pages
+  -> getCollection("posts")
+  -> getStaticPaths()
+  -> render(entry)
+```
+
+The Notion repository and Markdown provider are not imported by route pages. The integration boundary is the `posts` Astro Content Collection.
 
 ## Scope
 
@@ -75,7 +112,6 @@ src/server/notion/
   errors.ts
 
   database/
-    posts-database.ts
     data-source-resolver.ts
     view-resolver.ts
 
@@ -89,13 +125,14 @@ src/server/notion/
   content/
     markdown-provider.ts
     markdown-normalizer.ts
-    block-provider.ts
     media-policy.ts
 
   astro/
     notion-posts-loader.ts
 
   index.ts
+
+src/lib/content-routes.ts
 ```
 
 ## Responsibilities
@@ -105,6 +142,8 @@ src/server/notion/
 Creates the official `@notionhq/client` instance and pins `notionVersion` to `2026-03-11`.
 
 No business logic belongs here.
+
+The exported `notion` value is a lazy proxy so importing server-side Notion modules during tests does not read environment variables until the client is actually used.
 
 ### `config.ts`
 
@@ -180,7 +219,7 @@ getPublishedPostMetas(): Promise<BlogPostMeta[]>
 getPostMetaBySlug(slug: string): Promise<BlogPostMeta | null>
 ```
 
-The repository must paginate API results and memoize the post index during a build.
+The repository paginates API results and memoizes the post index during a build. Rejected loads are evicted from the memoization cache so a transient Notion failure does not poison the rest of the process.
 
 ### `content/markdown-provider.ts`
 
@@ -200,18 +239,11 @@ The provider must surface `truncated` and `unknownBlockIds`; callers should not 
 
 Normalizes Notion Enhanced Markdown into content suitable for Astro's Markdown pipeline.
 
-First version behavior:
+Current behavior:
 
-- Preserve standard Markdown.
-- Preserve enhanced HTML-like tags when Astro can pass them through.
-- Record unsupported blocks as diagnostics.
+- Preserve Markdown unchanged.
+- Return diagnostics from `media-policy.ts`.
 - Avoid custom rendering logic until a concrete unsupported block appears.
-
-### `content/block-provider.ts`
-
-Fallback-only provider for cases where Markdown output contains unknown blocks or a future feature needs structured block data.
-
-It should not be the default post body path.
 
 ### `content/media-policy.ts`
 
@@ -291,11 +323,15 @@ Uses `getStaticPaths()` to generate static routes from the collection and passes
 Category and tag pages:
 
 ```txt
+src/pages/categories/index.astro
 src/pages/categories/[category].astro
+src/pages/tags/index.astro
 src/pages/tags/[tag].astro
 ```
 
 Derive paths from `getCollection("posts")`, not from separate Notion calls.
+
+Category and tag URLs use `src/lib/content-routes.ts` instead of raw `encodeURIComponent()`. This keeps category/tag labels such as `Life/Work`, `..`, and `100%` inside one safe route segment while preserving the original label in page props and visible text.
 
 ## Data Flow
 
@@ -316,18 +352,20 @@ Astro pages
   -> render(entry)
 ```
 
+The collection entry ID is the Notion slug. The original Notion page ID is stored as `data.notionPageId`.
+
 ## Caching
 
 Use process-level memoization during a single Astro build:
 
-- Resolved config
 - Resolved data source
 - Published post metadata index
-- Per-page markdown response
 
 Do not add persistent disk caching in the first implementation.
 
 Do not persist Notion signed file URLs across builds.
+
+Rejected memoized post-index loads are removed from the cache before rethrowing. View Query cleanup is best-effort; a failed `DELETE /views/{view_id}/queries/{query_id}` should not hide a successful query result or mask the original query error.
 
 ## Error Handling
 
@@ -349,7 +387,10 @@ Unit tests:
 - Query selection prefers view ID over data source ID.
 - Data source resolver prefers explicit data source ID over first database data source.
 - Repository paginates all results.
+- Repository does not memoize failed post-index loads.
+- View Query cleanup failure does not hide a successful result.
 - Markdown provider maps Notion markdown responses and preserves diagnostics.
+- Category/tag route helper keeps arbitrary labels in one safe path segment.
 
 Integration-style tests:
 
@@ -359,15 +400,17 @@ Integration-style tests:
 
 E2E tests:
 
-- `/posts` renders published entries.
-- `/posts/[slug]` renders the Markdown body.
-- Tag/category pages link to the expected posts.
+- `/posts` loads.
+- `/categories` loads.
+- `/tags` loads.
+
+Build verification covers the real Notion-backed content sync path. In the verified local environment, `pnpm build` generated `/posts/test/` from the configured Notion content.
 
 ## Migration Notes
 
-The existing `src/server/notion/notion.ts` should be split along the module boundaries above.
+The old post rendering path based on `notion-client`, `react-notion-x`, record maps, and `src/styles/notion.css` has been removed from the active blog rendering path.
 
-The existing `notion-client` and `react-notion-x` recordMap path should not be the default implementation. It can be retained temporarily as a legacy high-fidelity renderer only if a concrete page requires it.
+The older `src/server/notion/notion.ts` and `src/server/notion/notion-helpers.ts` remain for compatibility with non-post Notion behavior such as friends data. New blog post pages should use `astro:content` only.
 
 ## References
 
