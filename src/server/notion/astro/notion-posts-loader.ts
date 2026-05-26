@@ -1,3 +1,4 @@
+import type { Loader, LoaderContext } from "astro/loaders"
 import {
   getPostMarkdown,
   type PostMarkdown,
@@ -5,28 +6,6 @@ import {
 import { normalizeNotionMarkdown } from "../content/markdown-normalizer"
 import { getPublishedPostMetas } from "../posts/repository"
 import type { BlogPostMeta } from "../posts/schema"
-
-type LoaderContext = {
-  store: {
-    clear(): void
-    set(entry: {
-      id: string
-      data: Record<string, unknown>
-      body: string
-      rendered: unknown
-      digest: string
-    }): void
-  }
-  parseData(args: {
-    id: string
-    data: Record<string, unknown>
-  }): Promise<Record<string, unknown>>
-  renderMarkdown(markdown: string): Promise<unknown>
-  generateDigest(value: unknown): string
-  logger: {
-    warn(message: string): void
-  }
-}
 
 type NotionPostsLoaderDeps = {
   loadPostMetas?: () => Promise<BlogPostMeta[]>
@@ -51,7 +30,7 @@ function toCollectionData(post: BlogPostMeta): Record<string, unknown> {
   }
 }
 
-export function notionPostsLoader(deps: NotionPostsLoaderDeps = {}) {
+export function notionPostsLoader(deps: NotionPostsLoaderDeps = {}): Loader {
   const loadPostMetas = deps.loadPostMetas ?? getPublishedPostMetas
   const loadMarkdown = deps.loadMarkdown ?? getPostMarkdown
 

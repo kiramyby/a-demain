@@ -5,7 +5,7 @@ type RequestClient = {
     method: "get" | "post" | "delete"
     path: string
     body?: Record<string, unknown>
-    query?: Record<string, unknown>
+    query?: Record<string, string | number | boolean | string[]>
   }): Promise<any>
 }
 
