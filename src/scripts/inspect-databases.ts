@@ -4,15 +4,17 @@
  */
 
 import { Client, isFullDatabase } from "@notionhq/client";
+import { NOTION_API_VERSION } from "../server/notion/client";
 
 const notion = new Client({
 	auth: process.env.NOTION_API_KEY,
+	notionVersion: NOTION_API_VERSION,
 });
 
 const POSTS_DATABASE_ID = process.env.NOTION_POSTS_DATABASE_ID;
 const FRIENDS_DATABASE_ID = process.env.NOTION_FRIENDS_DATABASE_ID;
 
-console.log("🔍 检查 Notion 数据库结构\n");
+console.log(`🔍 检查 Notion 数据库结构（${NOTION_API_VERSION}）\n`);
 
 async function inspectDatabase(databaseId: string, name: string) {
 	console.log(`\n${"=".repeat(60)}`);
@@ -32,7 +34,7 @@ async function inspectDatabase(databaseId: string, name: string) {
 		console.log(`\n数据库 ID: ${database.id}`);
 		console.log(`标题: ${database.title.map((t) => t.plain_text).join("")}`);
 
-		// 检查是否有 data_sources（2025-09-03 版本）
+		// 检查当前 Notion API 返回的 data_sources
 		const db = database as any;
 		if (db.data_sources && db.data_sources.length > 0) {
 			console.log(`\n📦 数据源（Data Sources）:`);
@@ -164,21 +166,19 @@ async function main() {
 	console.log("📝 关于视图（Views）的说明");
 	console.log(`${"=".repeat(60)}`);
 	console.log(`
-视图（Views）是 Notion 用户界面中的功能，允许用户：
-- 创建不同的筛选条件
-- 设置排序规则
-- 自定义显示的列
+视图（Views）是 Notion API 中的一等资源，可保存：
+- 筛选条件
+- 排序规则
+- 显示配置
 
 ⚠️  重要提示：
-1. 标准的 Notion API（2025-09-03）不直接提供访问视图配置的功能
-2. 视图的筛选和排序设置需要在代码中手动定义
-3. API 只能查询数据，不能获取或使用预定义的视图配置
-4. notion-query-database-view 工具需要 Business 计划 + Notion AI
+1. 当前脚本只检查数据库和第一个 Data Source 的结构
+2. Views 已经是 Notion API 的一等资源，但不在这个诊断脚本里展开
+3. Blog content pipeline 会优先使用已配置的 Posts View，再回退到 Data Source
 
 💡 建议：
-- 在 Notion 中创建视图来预览数据的不同展示方式
-- 在代码中复制视图的筛选和排序逻辑
-- 例如："Published" 视图 → 代码中使用 status.equals("Published") 过滤器
+- 用这个脚本检查数据库和 Data Source 属性
+- 用架构文档确认当前 blog pipeline 的 View / Data Source 优先级
 	`);
 
 	console.log(`\n${"=".repeat(60)}`);

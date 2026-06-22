@@ -3,9 +3,10 @@
  * 运行: pnpm tsx src/scripts/test-notion.ts
  */
 
-import { getAllPosts, getAllFriends } from "../server/notion/notion";
+import { getActiveFriends, getPublishedPostMetas } from "../server/notion";
+import { NOTION_API_VERSION } from "../server/notion/client";
 
-console.log("🔍 测试 Notion API 连接（2025-09-03 版本）\n");
+console.log(`🔍 测试 Notion API 连接（${NOTION_API_VERSION}）\n`);
 
 // 检查环境变量
 console.log("📝 环境变量检查:");
@@ -18,7 +19,7 @@ console.log(
 try {
 	// 测试文章
 	console.log("📚 获取博客文章...");
-	const posts = await getAllPosts();
+	const posts = await getPublishedPostMetas();
 	console.log(`  ✅ 成功获取 ${posts.length} 篇文章`);
 
 	if (posts.length > 0) {
@@ -33,7 +34,7 @@ try {
 
 	// 测试友链
 	console.log("🔗 获取友链...");
-	const friends = await getAllFriends();
+	const friends = await getActiveFriends();
 	console.log(`  ✅ 成功获取 ${friends.length} 个友链`);
 
 	if (friends.length > 0) {

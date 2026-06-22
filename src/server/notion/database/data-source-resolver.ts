@@ -18,32 +18,44 @@ export function clearDataSourceResolverCache(): void {
   dataSourceCache.clear()
 }
 
-export async function resolvePostsDataSourceId(
+export async function resolveDatabaseDataSourceId(
   client: DatabaseClient,
-  config: Config,
+  databaseId: string,
+  explicitDataSourceId?: string,
 ): Promise<string> {
-  if (config.postsDataSourceId) {
-    return config.postsDataSourceId
+  if (explicitDataSourceId) {
+    return explicitDataSourceId
   }
 
-  const cachedDataSourceId = dataSourceCache.get(config.postsDatabaseId)
+  const cachedDataSourceId = dataSourceCache.get(databaseId)
   if (cachedDataSourceId) {
     return cachedDataSourceId
   }
 
   const database = await client.databases.retrieve({
-    database_id: config.postsDatabaseId,
+    database_id: databaseId,
   })
 
   if (!isFullDatabase(database as any)) {
-    throw new NotionQueryError(`No read permissions on database ${config.postsDatabaseId}`)
+    throw new NotionQueryError(`No read permissions on database ${databaseId}`)
   }
 
   const dataSourceId = (database as any).data_sources?.[0]?.id
   if (!dataSourceId) {
-    throw new NotionQueryError(`Database ${config.postsDatabaseId} has no data sources`)
+    throw new NotionQueryError(`Database ${databaseId} has no data sources`)
   }
 
-  dataSourceCache.set(config.postsDatabaseId, dataSourceId)
+  dataSourceCache.set(databaseId, dataSourceId)
   return dataSourceId
+}
+
+export async function resolvePostsDataSourceId(
+  client: DatabaseClient,
+  config: Config,
+): Promise<string> {
+  return resolveDatabaseDataSourceId(
+    client,
+    config.postsDatabaseId,
+    config.postsDataSourceId,
+  )
 }

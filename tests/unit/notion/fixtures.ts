@@ -76,6 +76,22 @@ export function notionPostPage(overrides: Record<string, unknown> = {}) {
   }
 }
 
+export function notionFriendPage(overrides: Record<string, unknown> = {}) {
+  return {
+    object: "page",
+    id: "friend-1",
+    properties: {
+      Name: titleProperty("Kira"),
+      URL: urlProperty("https://example.com"),
+      Avatar: urlProperty("https://example.com/avatar.png"),
+      Description: richTextProperty("A personal site"),
+      Status: selectProperty("Active"),
+      Group: selectProperty("Blog"),
+    },
+    ...overrides,
+  }
+}
+
 export function markdownResponse(overrides: Record<string, unknown> = {}) {
   return {
     object: "page_markdown",

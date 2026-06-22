@@ -49,4 +49,4 @@ Notion-hosted signed media URLs are rendered as returned and reported as diagnos
 
 The current blog pipeline is the path rooted in [src/content.config.ts](../../src/content.config.ts) and [src/server/notion/index.ts](../../src/server/notion/index.ts).
 
-[src/server/notion/notion.ts](../../src/server/notion/notion.ts) and [src/server/notion/notion-helpers.ts](../../src/server/notion/notion-helpers.ts) remain for non-blog compatibility paths and are not part of the blog content pipeline documented here.
+Friends querying is isolated under [src/server/notion/friends/repository.ts](../../src/server/notion/friends/repository.ts) for non-blog Notion usage and is not part of the blog content pipeline documented here.

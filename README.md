@@ -23,9 +23,9 @@ Install dependencies:
 pnpm install
 ```
 
-Copy `.env.example` to `.env` and fill the required values. `.env.example` is the configuration source of truth; `NOTION_FRIENDS_DATABASE_ID` remains an optional legacy compatibility setting.
+Copy `.env.example` to `.env` and fill the required values. `.env.example` is the configuration source of truth; `NOTION_FRIENDS_DATABASE_ID` remains optional for non-blog Notion usage.
 
-The Notion integration must have read access to the posts database and any database used by the legacy friends integration.
+The Notion integration must have read access to the posts database and any configured friends database.
 
 ## Scripts
 

@@ -1,5 +1,7 @@
 export { NOTION_API_VERSION, createNotionClient } from "./client"
 export { readNotionConfig } from "./config"
 export { notionPostsLoader } from "./astro/notion-posts-loader"
+export { getActiveFriends } from "./friends/repository"
 export { getPublishedPostMetas, getPostMetaBySlug } from "./posts/repository"
+export type { Friend } from "./friends/schema"
 export type { BlogPostMeta } from "./posts/schema"

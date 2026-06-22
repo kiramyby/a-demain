@@ -9,6 +9,11 @@ export type NotionConfig = {
   postsViewId?: string
 }
 
+export type NotionFriendsConfig = {
+  apiKey: string
+  friendsDatabaseId: string
+}
+
 function defaultEnv(): NotionEnv {
   return {
     ...(typeof process !== "undefined" ? process.env : {}),
@@ -30,5 +35,14 @@ export function readNotionConfig(env: NotionEnv = defaultEnv()): NotionConfig {
     postsDatabaseId: required(env, "NOTION_POSTS_DATABASE_ID"),
     postsDataSourceId: env.NOTION_POSTS_DATA_SOURCE_ID || undefined,
     postsViewId: env.NOTION_POSTS_VIEW_ID || undefined,
+  }
+}
+
+export function readNotionFriendsConfig(
+  env: NotionEnv = defaultEnv(),
+): NotionFriendsConfig {
+  return {
+    apiKey: required(env, "NOTION_API_KEY"),
+    friendsDatabaseId: required(env, "NOTION_FRIENDS_DATABASE_ID"),
   }
 }
