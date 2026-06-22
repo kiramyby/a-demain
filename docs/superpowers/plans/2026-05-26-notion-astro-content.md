@@ -1,5 +1,7 @@
 # Notion Astro Content Implementation Plan
 
+> Historical execution record. Current implemented facts live in [docs/architecture/README.md](../../architecture/README.md) and [docs/architecture/blog-content-pipeline.md](../../architecture/blog-content-pipeline.md).
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Replace the current partial Notion adapter with an Astro Content Collections pipeline that loads published Notion database entries and official Notion Markdown at build time.

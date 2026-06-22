@@ -1,5 +1,7 @@
 # Notion Astro Content Design
 
+> Historical design record. Current implemented facts live in [docs/architecture/README.md](../../architecture/README.md) and [docs/architecture/blog-content-pipeline.md](../../architecture/blog-content-pipeline.md).
+
 Date: 2026-05-26
 Status: Implemented on `main`
 
