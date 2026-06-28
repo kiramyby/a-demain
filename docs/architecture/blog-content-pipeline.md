@@ -1,6 +1,6 @@
 # Blog content pipeline
 
-Current as of 2026-06-28.
+Current as of 2026-06-29.
 
 ## Summary
 
@@ -20,7 +20,7 @@ At the Notion boundary, a **Posts View** or **Posts Data Source** yields **Notio
 
 Each **Notion Page** is mapped into `BlogPostMeta` in [src/server/notion/posts/mapper.ts](../../src/server/notion/posts/mapper.ts), then cached for the build process in [src/server/notion/posts/cache.ts](../../src/server/notion/posts/cache.ts).
 
-For each post metadata record, the loader fetches Markdown from [src/server/notion/content/markdown-provider.ts](../../src/server/notion/content/markdown-provider.ts), normalizes it in [src/server/notion/content/markdown-normalizer.ts](../../src/server/notion/content/markdown-normalizer.ts), and writes a rendered entry into the Astro `posts` collection by slug in [src/server/notion/astro/notion-posts-loader.ts](../../src/server/notion/astro/notion-posts-loader.ts).
+For each post metadata record, the loader writes a rendered entry into the Astro `posts` collection by slug. Markdown retrieval, normalization, diagnostics, and rendered output are documented in [Content rendering](./content-rendering.md).
 
 Route pages then read only from collection APIs, not from Notion repositories directly, as shown by [src/pages/posts/index.astro](../../src/pages/posts/index.astro), [src/pages/posts/[slug].astro](../../src/pages/posts/%5Bslug%5D.astro), [src/pages/categories/index.astro](../../src/pages/categories/index.astro), [src/pages/categories/[category].astro](../../src/pages/categories/%5Bcategory%5D.astro), [src/pages/tags/index.astro](../../src/pages/tags/index.astro), and [src/pages/tags/[tag].astro](../../src/pages/tags/%5Btag%5D.astro).
 
@@ -34,7 +34,7 @@ The current route surfaces and category/tag route encoding are documented in [Si
 
 Blog content sync is a build-time integration. It requires valid Notion credentials, usable Notion identifiers, and network access when Astro content sync runs through the blog pipeline entry points.
 
-Notion-hosted signed media URLs are rendered as returned and reported as diagnostics; they are not synchronized into local project assets, as described by [src/server/notion/content/media-policy.ts](../../src/server/notion/content/media-policy.ts).
+Notion-hosted signed media handling is documented in [Content rendering](./content-rendering.md).
 
 ## Compatibility boundary
 

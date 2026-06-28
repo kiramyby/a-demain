@@ -1,6 +1,6 @@
 # Architecture
 
-Current as of 2026-06-28.
+Current as of 2026-06-29.
 
 ## What this layer is for
 
@@ -22,5 +22,6 @@ This is an Astro 6 personal site. Blog publishing is a build-time path from Noti
 
 - [Blog content pipeline](./blog-content-pipeline.md) - Current implemented flow from Notion content to site routes.
 - [Content model](./content-model.md) - Current blog post metadata and Astro collection schema.
+- [Content rendering](./content-rendering.md) - Current Markdown retrieval, normalization, diagnostics, and rendered output.
 - [Notion module boundaries](./notion-module-boundaries.md) - Current implemented boundaries inside `src/server/notion`.
 - [Site routing](./site-routing.md) - Current implemented route surfaces and content collection exits.

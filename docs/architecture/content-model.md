@@ -1,6 +1,6 @@
 # Content model
 
-Current as of 2026-06-28.
+Current as of 2026-06-29.
 
 ## Summary
 
@@ -51,7 +51,7 @@ The Astro `posts` collection schema in [src/content.config.ts](../../src/content
 - `seoTitle`
 - `seoKeywords`
 
-The collection entry id is the post slug. [src/server/notion/astro/notion-posts-loader.ts](../../src/server/notion/astro/notion-posts-loader.ts) writes each entry with `id: post.slug`, stores normalized Markdown as `body`, stores rendered Markdown as `rendered`, and generates the entry digest from the parsed data and normalized Markdown.
+The collection entry id is the post slug. Body rendering and digest generation are documented in [Content rendering](./content-rendering.md).
 
 The collection schema coerces `publishedDate` and `updatedDate` to nullable dates.
 
