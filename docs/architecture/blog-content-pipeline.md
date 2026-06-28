@@ -10,9 +10,7 @@ The blog content pipeline loads blog content from Notion during Astro content sy
 
 The upstream content container is the **Posts Database**. Source resolution precedence is: configured **Posts View**, then configured **Posts Data Source**, then the first **Posts Data Source** resolved from the database in [src/server/notion/posts/repository.ts](../../src/server/notion/posts/repository.ts) and [src/server/notion/database/data-source-resolver.ts](../../src/server/notion/database/data-source-resolver.ts).
 
-The current editorial contract has two hard requirements for mapping in [src/server/notion/posts/mapper.ts](../../src/server/notion/posts/mapper.ts): `Title` and `Slug`.
-
-The current pipeline also reads `Status`, `Published Date`, `Updated Date`, `Category`, `Tags`, `Description`, `Cover Image`, `Featured`, `SEO Title`, and `SEO Keywords`, with the property names centralized in [src/server/notion/posts/schema.ts](../../src/server/notion/posts/schema.ts). `Status` is used by the data source fallback query in [src/server/notion/posts/queries.ts](../../src/server/notion/posts/queries.ts); when a **Posts View** is configured, the view defines the result set instead.
+The current editorial contract and field mapping are documented in [Content model](./content-model.md). `Status` is used by the data source fallback query in [src/server/notion/posts/queries.ts](../../src/server/notion/posts/queries.ts); when a **Posts View** is configured, the view defines the result set instead.
 
 ## Flow
 
@@ -20,7 +18,7 @@ The pipeline enters Astro content sync through [src/content.config.ts](../../src
 
 At the Notion boundary, a **Posts View** or **Posts Data Source** yields **Notion Pages** through [src/server/notion/posts/repository.ts](../../src/server/notion/posts/repository.ts) and [src/server/notion/database/view-resolver.ts](../../src/server/notion/database/view-resolver.ts).
 
-Each **Notion Page** is mapped into a stable post metadata record in [src/server/notion/posts/mapper.ts](../../src/server/notion/posts/mapper.ts), then cached for the build process in [src/server/notion/posts/cache.ts](../../src/server/notion/posts/cache.ts).
+Each **Notion Page** is mapped into `BlogPostMeta` in [src/server/notion/posts/mapper.ts](../../src/server/notion/posts/mapper.ts), then cached for the build process in [src/server/notion/posts/cache.ts](../../src/server/notion/posts/cache.ts).
 
 For each post metadata record, the loader fetches Markdown from [src/server/notion/content/markdown-provider.ts](../../src/server/notion/content/markdown-provider.ts), normalizes it in [src/server/notion/content/markdown-normalizer.ts](../../src/server/notion/content/markdown-normalizer.ts), and writes a rendered entry into the Astro `posts` collection by slug in [src/server/notion/astro/notion-posts-loader.ts](../../src/server/notion/astro/notion-posts-loader.ts).
 

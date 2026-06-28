@@ -21,5 +21,6 @@ This is an Astro 6 personal site. Blog publishing is a build-time path from Noti
 ## Current architecture pages
 
 - [Blog content pipeline](./blog-content-pipeline.md) - Current implemented flow from Notion content to site routes.
+- [Content model](./content-model.md) - Current blog post metadata and Astro collection schema.
 - [Notion module boundaries](./notion-module-boundaries.md) - Current implemented boundaries inside `src/server/notion`.
 - [Site routing](./site-routing.md) - Current implemented route surfaces and content collection exits.

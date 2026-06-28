@@ -6,7 +6,7 @@ Current as of 2026-06-28.
 
 The current blog route surface reads from the Astro `posts` collection. Route pages do not query Notion repositories directly.
 
-[src/content.config.ts](../../src/content.config.ts) defines the `posts` collection and uses [src/server/notion/index.ts](../../src/server/notion/index.ts) as the app-facing Notion loader entry.
+[src/content.config.ts](../../src/content.config.ts) defines the `posts` collection and uses [src/server/notion/index.ts](../../src/server/notion/index.ts) as the app-facing Notion loader entry. The collection schema is documented in [Content model](./content-model.md).
 
 ## Blog route surfaces
 
