@@ -1,7 +1,7 @@
 # A demain
 
 This repository publishes a personal Astro site whose blog content originates in Notion.
-Current as of 2026-06-28.
+Current as of 2026-06-29.
 
 ## Language
 

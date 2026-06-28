@@ -22,7 +22,7 @@ Each **Notion Page** is mapped into `BlogPostMeta` in [src/server/notion/posts/m
 
 For each post metadata record, the loader writes a rendered entry into the Astro `posts` collection by slug. Markdown retrieval, normalization, diagnostics, and rendered output are documented in [Content rendering](./content-rendering.md).
 
-Route pages then read only from collection APIs, not from Notion repositories directly, as shown by [src/pages/posts/index.astro](../../src/pages/posts/index.astro), [src/pages/posts/[slug].astro](../../src/pages/posts/%5Bslug%5D.astro), [src/pages/categories/index.astro](../../src/pages/categories/index.astro), [src/pages/categories/[category].astro](../../src/pages/categories/%5Bcategory%5D.astro), [src/pages/tags/index.astro](../../src/pages/tags/index.astro), and [src/pages/tags/[tag].astro](../../src/pages/tags/%5Btag%5D.astro).
+Route publication details are documented in [Site routing](./site-routing.md).
 
 ## Outputs
 

@@ -1,6 +1,6 @@
 # Notion module boundaries
 
-Current as of 2026-06-28.
+Current as of 2026-06-29.
 
 ## Summary
 
@@ -30,15 +30,13 @@ Blog post loading is rooted in [src/content.config.ts](../../src/content.config.
 
 The posts boundary maps Notion Pages into `BlogPostMeta` through [src/server/notion/posts/mapper.ts](../../src/server/notion/posts/mapper.ts) and [src/server/notion/posts/schema.ts](../../src/server/notion/posts/schema.ts). Markdown body loading and normalization live under [src/server/notion/content](../../src/server/notion/content).
 
-Route pages read the Astro `posts` collection and do not call Notion repositories directly.
-
 ## Friends boundary
 
 Friends querying is isolated under [src/server/notion/friends](../../src/server/notion/friends).
 
 [src/server/notion/friends/repository.ts](../../src/server/notion/friends/repository.ts) exports `getActiveFriends`, resolves the Friends Database to a Data Source, queries `Status = Active`, sorts by `Name`, paginates Notion results, and maps pages into the `Friend` model from [src/server/notion/friends/schema.ts](../../src/server/notion/friends/schema.ts).
 
-The current app has no friends route page. Friends querying is a non-blog Notion path and is not part of the Astro blog content sync.
+Friends querying is a non-blog Notion path and is not part of the Astro blog content sync.
 
 ## Diagnostic scripts
 

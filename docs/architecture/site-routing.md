@@ -1,6 +1,6 @@
 # Site routing
 
-Current as of 2026-06-28.
+Current as of 2026-06-29.
 
 ## Summary
 
