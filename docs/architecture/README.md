@@ -1,11 +1,15 @@
 # Architecture
 
-Current as of 2026-06-18.
+Current as of 2026-06-28.
 
 ## What this layer is for
 
 This directory records current implemented system facts for the repository.
-The current coverage is intentionally narrow and only documents the blog content pipeline so far.
+Read [CONTEXT.md](../../CONTEXT.md) first for canonical language.
+
+## Current system snapshot
+
+This is an Astro 6 personal site. Blog publishing is a build-time path from Notion to the Astro `posts` collection and then to route pages. The Notion server module currently has separate boundaries for blog posts, friends, and shared Notion infrastructure.
 
 ## Source-of-truth priority
 
@@ -16,5 +20,5 @@ The current coverage is intentionally narrow and only documents the blog content
 
 ## Current architecture pages
 
-- [CONTEXT.md](../../CONTEXT.md) - Read first for canonical language.
 - [Blog content pipeline](./blog-content-pipeline.md) - Current implemented flow from Notion content to site routes.
+- [Notion module boundaries](./notion-module-boundaries.md) - Current implemented boundaries inside `src/server/notion`.

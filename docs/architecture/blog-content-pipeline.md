@@ -1,6 +1,6 @@
 # Blog content pipeline
 
-Current as of 2026-06-18.
+Current as of 2026-06-28.
 
 ## Summary
 
@@ -47,6 +47,6 @@ Notion-hosted signed media URLs are rendered as returned and reported as diagnos
 
 ## Compatibility boundary
 
-The current blog pipeline is the path rooted in [src/content.config.ts](../../src/content.config.ts) and [src/server/notion/index.ts](../../src/server/notion/index.ts).
+The current blog pipeline is the path rooted in [src/content.config.ts](../../src/content.config.ts) and [src/server/notion/astro/notion-posts-loader.ts](../../src/server/notion/astro/notion-posts-loader.ts).
 
-Friends querying is isolated under [src/server/notion/friends/repository.ts](../../src/server/notion/friends/repository.ts) for non-blog Notion usage and is not part of the blog content pipeline documented here.
+Shared Notion infrastructure and non-blog Notion paths are documented in [Notion module boundaries](./notion-module-boundaries.md).
