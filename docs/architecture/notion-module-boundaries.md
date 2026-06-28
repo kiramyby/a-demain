@@ -4,7 +4,9 @@ Current as of 2026-06-28.
 
 ## Summary
 
-The Notion module lives under [src/server/notion](../../src/server/notion). Its public exports are collected in [src/server/notion/index.ts](../../src/server/notion/index.ts). Current runtime exits are the Astro blog loader, blog post repository functions, and the friends repository function.
+The Notion module lives under [src/server/notion](../../src/server/notion). Its app-facing export is collected in [src/server/notion/index.ts](../../src/server/notion/index.ts), which currently exposes the Astro blog loader.
+
+Boundary-specific code imports repositories and shared infrastructure by explicit path instead of through the app-facing export.
 
 The module targets Notion API version `2026-03-11` in [src/server/notion/client.ts](../../src/server/notion/client.ts).
 

@@ -1,5 +1,3 @@
-// TODO: replace inline type with `import type { BlogPost } from '@/server/notion'`
-// once src/server/ is committed to the repo.
 type BlogPost = {
   id: string
   title: string

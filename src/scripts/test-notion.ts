@@ -3,8 +3,9 @@
  * 运行: pnpm tsx src/scripts/test-notion.ts
  */
 
-import { getActiveFriends, getPublishedPostMetas } from "../server/notion";
 import { NOTION_API_VERSION } from "../server/notion/client";
+import { getActiveFriends } from "../server/notion/friends/repository";
+import { getPublishedPostMetas } from "../server/notion/posts/repository";
 
 console.log(`🔍 测试 Notion API 连接（${NOTION_API_VERSION}）\n`);
 
