@@ -28,16 +28,9 @@ Route pages then read only from collection APIs, not from Notion repositories di
 
 ## Outputs
 
-The current pipeline publishes the following route surfaces from the same `posts` collection snapshot:
+The current pipeline writes the Astro `posts` collection snapshot. Site routes publish from that snapshot.
 
-- `/posts`
-- `/posts/[slug]`
-- `/categories`
-- `/categories/[category]`
-- `/tags`
-- `/tags/[tag]`
-
-Category and tag labels are encoded into single safe route segments in [src/lib/content-routes.ts](../../src/lib/content-routes.ts).
+The current route surfaces and category/tag route encoding are documented in [Site routing](./site-routing.md).
 
 ## Current constraints
 
