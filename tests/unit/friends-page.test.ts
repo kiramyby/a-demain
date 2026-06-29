@@ -13,6 +13,24 @@ const friend: Friend = {
 };
 
 describe("loadFriendsPageState", () => {
+	it("returns disabled state without loading friends when the route is disabled", async () => {
+		let loadCount = 0;
+
+		await expect(
+			loadFriendsPageState(
+				async () => {
+					loadCount += 1;
+					return [friend];
+				},
+				{ route: false, failBuildOnError: false },
+			),
+		).resolves.toEqual({
+			kind: "disabled",
+			message: "Friends are not enabled.",
+		});
+		expect(loadCount).toBe(0);
+	});
+
 	it("returns ready state when active friends exist", async () => {
 		await expect(loadFriendsPageState(async () => [friend])).resolves.toEqual({
 			kind: "ready",
@@ -29,12 +47,26 @@ describe("loadFriendsPageState", () => {
 
 	it("returns error state when friends cannot be loaded", async () => {
 		await expect(
-			loadFriendsPageState(async () => {
-				throw new Error("missing config");
-			}),
+			loadFriendsPageState(
+				async () => {
+					throw new Error("missing config");
+				},
+				{ route: true, failBuildOnError: false },
+			),
 		).resolves.toEqual({
 			kind: "error",
 			message: "Friends are unavailable right now.",
 		});
+	});
+
+	it("throws load failures when friends errors are configured as build failures", async () => {
+		await expect(
+			loadFriendsPageState(
+				async () => {
+					throw new Error("missing config");
+				},
+				{ route: true, failBuildOnError: true },
+			),
+		).rejects.toThrow("missing config");
 	});
 });

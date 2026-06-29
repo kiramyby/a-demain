@@ -1,9 +1,15 @@
 ---
+import { SITE_FEATURES } from "@/config";
 import BrowseLayout from "@/layouts/BrowseLayout.astro";
 import { loadFriendsPageState } from "@/lib/friends-page";
 import { getActiveFriends } from "@/server/notion/friends/repository";
 
-const state = await loadFriendsPageState(getActiveFriends);
+const state = await loadFriendsPageState(getActiveFriends, SITE_FEATURES.friends);
+
+if (state.kind === "disabled") {
+	Astro.response.status = 404;
+	Astro.response.statusText = "Not found";
+}
 ---
 
 <BrowseLayout>
@@ -11,7 +17,7 @@ const state = await loadFriendsPageState(getActiveFriends);
     <h1 class="text-4xl font-bold">Friends</h1>
 
     {
-      state.kind === "error" && (
+      (state.kind === "disabled" || state.kind === "error") && (
         <p class="border-border bg-secondary-background mt-8 border-3 p-5">
           {state.message}
         </p>

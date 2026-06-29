@@ -16,3 +16,10 @@ export const SITE_CONFIG = {
 	defaultImage: "./default-image.png",
 	lang: "en-US",
 };
+
+export const SITE_FEATURES = {
+	friends: {
+		route: true,
+		failBuildOnError: false,
+	},
+} as const;

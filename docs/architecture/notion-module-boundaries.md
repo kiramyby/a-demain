@@ -40,6 +40,8 @@ Friends querying is a non-blog Notion path and is not part of the Astro blog con
 
 [src/pages/friends/index.astro](../../src/pages/friends/index.astro) publishes active Friends through the `/friends` route. It loads ready, empty, and unavailable page states through [src/lib/friends-page.ts](../../src/lib/friends-page.ts), which calls `getActiveFriends`.
 
+[src/config.ts](../../src/config.ts) currently sets `SITE_FEATURES.friends.failBuildOnError` to `false`, so friends repository failures render an unavailable page state instead of failing the route render.
+
 ## Diagnostic scripts
 
 [src/scripts/test-notion.ts](../../src/scripts/test-notion.ts) exercises the blog posts repository and friends repository with the current Notion API version.

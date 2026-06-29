@@ -1,6 +1,9 @@
 ---
+import { SITE_FEATURES } from "@/config";
 import GlassBlock from "./GlassBlock.astro";
 import { Button } from "./ui/button";
+
+const showFriendsRoute = SITE_FEATURES.friends.route;
 ---
 
 <nav
@@ -21,9 +24,15 @@ import { Button } from "./ui/button";
         >
       </li>
       <li><a href="/tags/"><Button className="lg:min-w-24">Tag</Button></a></li>
-      <li>
-        <a href="/friends/"><Button className="lg:min-w-24">Friends</Button></a>
-      </li>
+      {
+        showFriendsRoute && (
+          <li>
+            <a href="/friends/">
+              <Button className="lg:min-w-24">Friends</Button>
+            </a>
+          </li>
+        )
+      }
       <li>
         <a href="/about/"><Button className="lg:min-w-24">About</Button></a>
       </li>
