@@ -2,6 +2,40 @@ import { describe, expect, it, vi } from "vitest"
 import { notionPostsLoader } from "@/server/notion/astro/notion-posts-loader"
 
 describe("notionPostsLoader", () => {
+  it("skips content sync when the skip flag is set", async () => {
+    const clear = vi.fn()
+    const set = vi.fn()
+    const info = vi.fn()
+    const loadPostMetas = vi.fn()
+    const loadMarkdown = vi.fn()
+    const loader = notionPostsLoader({
+      loadPostMetas,
+      loadMarkdown,
+      shouldSkipContentSync: () => true,
+    })
+
+    await loader.load({
+      store: {
+        clear,
+        set,
+      },
+      logger: {
+        warn: vi.fn(),
+        info,
+        error: vi.fn(),
+        debug: vi.fn(),
+      },
+    } as any)
+
+    expect(clear).toHaveBeenCalledOnce()
+    expect(set).not.toHaveBeenCalled()
+    expect(loadPostMetas).not.toHaveBeenCalled()
+    expect(loadMarkdown).not.toHaveBeenCalled()
+    expect(info).toHaveBeenCalledWith(
+      "Skipping Notion posts loader because SKIP_NOTION_CONTENT_SYNC=1",
+    )
+  })
+
   it("stores rendered entries by slug", async () => {
     const set = vi.fn()
     const loader = notionPostsLoader({

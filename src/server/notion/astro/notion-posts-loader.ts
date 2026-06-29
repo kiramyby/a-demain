@@ -10,6 +10,20 @@ import type { BlogPostMeta } from "../posts/schema"
 type NotionPostsLoaderDeps = {
   loadPostMetas?: () => Promise<BlogPostMeta[]>
   loadMarkdown?: (pageId: string) => Promise<PostMarkdown>
+  shouldSkipContentSync?: () => boolean
+}
+
+type Env = Record<string, string | undefined>
+
+function defaultEnv(): Env {
+  return {
+    ...(typeof process !== "undefined" ? process.env : {}),
+    ...((import.meta as unknown as { env?: Env }).env ?? {}),
+  }
+}
+
+function shouldSkipContentSync(env: Env = defaultEnv()): boolean {
+  return env.SKIP_NOTION_CONTENT_SYNC === "1"
 }
 
 function toCollectionData(post: BlogPostMeta): Record<string, unknown> {
@@ -33,11 +47,20 @@ function toCollectionData(post: BlogPostMeta): Record<string, unknown> {
 export function notionPostsLoader(deps: NotionPostsLoaderDeps = {}): Loader {
   const loadPostMetas = deps.loadPostMetas ?? getPublishedPostMetas
   const loadMarkdown = deps.loadMarkdown ?? getPostMarkdown
+  const skipContentSync = deps.shouldSkipContentSync ?? shouldSkipContentSync
 
   return {
     name: "notion-posts-loader",
     async load(context: LoaderContext) {
       context.store.clear()
+
+      if (skipContentSync()) {
+        context.logger.info(
+          "Skipping Notion posts loader because SKIP_NOTION_CONTENT_SYNC=1",
+        )
+        return
+      }
+
       const posts = await loadPostMetas()
 
       for (const post of posts) {

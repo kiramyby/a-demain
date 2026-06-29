@@ -34,6 +34,8 @@ The current route surfaces and category/tag route encoding are documented in [Si
 
 Blog content sync is a build-time integration. It requires valid Notion credentials, usable Notion identifiers, and network access when Astro content sync runs through the blog pipeline entry points.
 
+`pnpm typecheck` sets `SKIP_NOTION_CONTENT_SYNC=1`, so the Notion posts loader clears the collection store and returns without contacting Notion during Astro check.
+
 Notion-hosted signed media handling is documented in [Content rendering](./content-rendering.md).
 
 ## Compatibility boundary
