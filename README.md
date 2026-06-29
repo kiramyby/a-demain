@@ -33,12 +33,14 @@ The Notion integration must have read access to the posts database and any confi
 pnpm dev          # start Astro dev server
 pnpm build        # sync Notion content and build static site
 pnpm preview      # preview built output
+pnpm lint         # run Biome checks
+pnpm check        # run lint, typecheck, and Vitest
 pnpm test         # run Vitest
 pnpm typecheck    # run astro check without Notion content sync
 pnpm test:e2e     # run Playwright smoke tests
 ```
 
-Some commands require valid Notion credentials and network access because they trigger blog content sync. `pnpm typecheck` skips Notion content sync.
+Some commands require valid Notion credentials and network access because they trigger blog content sync. `pnpm typecheck` skips Notion content sync, and `pnpm check` does not run the production build or Playwright e2e tests.
 
 ## Documentation
 
