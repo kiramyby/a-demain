@@ -8,7 +8,7 @@
 	"files": {
 		"ignoreUnknown": true,
 		"maxSize": 1048576,
-		"includes": ["**", "!!**/dist", "!!**/.astro"]
+		"includes": ["**", "!!**/dist", "!!**/.astro", "!!**/.claude"]
 	},
 	"formatter": {
 		"enabled": true,
