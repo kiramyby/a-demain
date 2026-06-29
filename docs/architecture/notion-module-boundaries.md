@@ -1,6 +1,6 @@
 # Notion module boundaries
 
-Current as of 2026-06-29.
+Current as of 2026-06-30.
 
 ## Summary
 
@@ -37,6 +37,8 @@ Friends querying is isolated under [src/server/notion/friends](../../src/server/
 [src/server/notion/friends/repository.ts](../../src/server/notion/friends/repository.ts) exports `getActiveFriends`, resolves the Friends Database to a Data Source, queries `Status = Active`, sorts by `Name`, paginates Notion results, and maps pages into the `Friend` model from [src/server/notion/friends/schema.ts](../../src/server/notion/friends/schema.ts).
 
 Friends querying is a non-blog Notion path and is not part of the Astro blog content sync.
+
+[src/pages/friends/index.astro](../../src/pages/friends/index.astro) publishes active Friends through the `/friends` route. It loads ready, empty, and unavailable page states through [src/lib/friends-page.ts](../../src/lib/friends-page.ts), which calls `getActiveFriends`.
 
 ## Diagnostic scripts
 

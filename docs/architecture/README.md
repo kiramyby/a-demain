@@ -1,6 +1,6 @@
 # Architecture
 
-Current as of 2026-06-29.
+Current as of 2026-06-30.
 
 ## What this layer is for
 
@@ -9,7 +9,7 @@ Read [CONTEXT.md](../../CONTEXT.md) first for canonical language.
 
 ## Current system snapshot
 
-This is an Astro 6 personal site. Blog publishing is a build-time path from Notion to the Astro `posts` collection and then to route pages. The Notion server module currently has separate boundaries for blog posts, friends, and shared Notion infrastructure.
+This is an Astro 6 personal site. Blog publishing is a build-time path from Notion to the Astro `posts` collection and then to route pages. The `/friends` route page publishes active Friends from the Notion friends repository. The Notion server module currently has separate boundaries for blog posts, friends, and shared Notion infrastructure.
 
 ## Source-of-truth priority
 

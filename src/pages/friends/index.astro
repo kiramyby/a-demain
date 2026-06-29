@@ -1,0 +1,63 @@
+---
+import BrowseLayout from "@/layouts/BrowseLayout.astro";
+import { loadFriendsPageState } from "@/lib/friends-page";
+import { getActiveFriends } from "@/server/notion/friends/repository";
+
+const state = await loadFriendsPageState(getActiveFriends);
+---
+
+<BrowseLayout>
+  <section class="px-6 py-10 lg:px-10">
+    <h1 class="text-4xl font-bold">Friends</h1>
+
+    {
+      state.kind === "error" && (
+        <p class="border-border bg-secondary-background mt-8 border-3 p-5">
+          {state.message}
+        </p>
+      )
+    }
+
+    {
+      state.kind === "empty" && (
+        <p class="border-border bg-secondary-background mt-8 border-3 p-5">
+          No active friends yet.
+        </p>
+      )
+    }
+
+    {
+      state.kind === "ready" && (
+        <div class="mt-8 grid gap-4 md:grid-cols-2">
+          {state.friends.map((friend) => (
+            <article class="border-border bg-secondary-background border-3 p-5">
+              <div class="flex gap-4">
+                {friend.avatar && (
+                  <img
+                    class="border-border h-14 w-14 shrink-0 border-2 object-cover"
+                    src={friend.avatar}
+                    alt=""
+                    loading="lazy"
+                  />
+                )}
+                <div>
+                  <h2 class="text-2xl font-bold">
+                    {friend.url ? (
+                      <a href={friend.url} target="_blank" rel="noreferrer" class="hover:underline">
+                        {friend.name}
+                      </a>
+                    ) : (
+                      friend.name
+                    )}
+                  </h2>
+                  {friend.description && <p class="mt-2 text-sm">{friend.description}</p>}
+                  {friend.group && <p class="mt-4 text-sm font-semibold">{friend.group}</p>}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      )
+    }
+  </section>
+</BrowseLayout>

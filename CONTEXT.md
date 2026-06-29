@@ -1,7 +1,7 @@
 # A demain
 
 This repository publishes a personal Astro site whose blog content originates in Notion.
-Current as of 2026-06-29.
+Current as of 2026-06-30.
 
 ## Language
 
@@ -55,7 +55,7 @@ _Avoid_: posts data source, view
 - A **Post** may belong to zero or one **Category** and zero or more **Tags**.
 - A **Post** is published through one or more **Route pages** on the site.
 - A **Friend** originates as a **Notion Page** selected from a **Friends Data Source** under the **Friends Database**.
-- The current friends integration has no Route page surface.
+- A **Friend** is published through the `/friends` **Route page**.
 
 ## Example dialogue
 
