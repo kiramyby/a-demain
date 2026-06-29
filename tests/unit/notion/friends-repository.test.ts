@@ -2,6 +2,10 @@ import { describe, expect, it, vi } from "vitest";
 import { getActiveFriends, mapNotionPageToFriend } from "@/server/notion/friends/repository";
 import { notionFriendPage } from "./fixtures";
 
+type FriendRepositoryClient = NonNullable<
+	NonNullable<Parameters<typeof getActiveFriends>[0]>["client"]
+>;
+
 describe("mapNotionPageToFriend", () => {
 	it("maps a Notion page into a stable friend model", () => {
 		expect(mapNotionPageToFriend(notionFriendPage())).toEqual({
@@ -40,7 +44,7 @@ describe("getActiveFriends", () => {
 		};
 
 		const friends = await getActiveFriends({
-			client: client as any,
+			client: client as unknown as FriendRepositoryClient,
 			config: {
 				apiKey: "secret",
 				friendsDatabaseId: "friends-db",

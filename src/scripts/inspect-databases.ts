@@ -6,6 +6,31 @@
 import { Client, isFullDatabase } from "@notionhq/client";
 import { NOTION_API_VERSION } from "../server/notion/client";
 
+type InspectOption = {
+	name?: string;
+	color?: string;
+};
+
+type InspectGroup = InspectOption & {
+	option_ids?: string[];
+};
+
+type InspectProperty = {
+	id?: string;
+	type?: string;
+	select?: { options?: InspectOption[] };
+	status?: { options?: InspectOption[]; groups?: InspectGroup[] };
+	multi_select?: { options?: InspectOption[] };
+	number?: { format?: string };
+	formula?: { expression?: string };
+	relation?: { database_id?: string };
+};
+
+type InspectDataSource = {
+	views?: unknown;
+	properties?: Record<string, InspectProperty>;
+};
+
 const notion = new Client({
 	auth: process.env.NOTION_API_KEY,
 	notionVersion: NOTION_API_VERSION,
@@ -15,6 +40,16 @@ const POSTS_DATABASE_ID = process.env.NOTION_POSTS_DATABASE_ID;
 const FRIENDS_DATABASE_ID = process.env.NOTION_FRIENDS_DATABASE_ID;
 
 console.log(`🔍 检查 Notion 数据库结构（${NOTION_API_VERSION}）\n`);
+
+function errorMessage(error: unknown): string {
+	return error instanceof Error ? error.message : String(error);
+}
+
+function errorCode(error: unknown): string | undefined {
+	return typeof error === "object" && error !== null && "code" in error
+		? String((error as { code?: unknown }).code)
+		: undefined;
+}
 
 async function inspectDatabase(databaseId: string, name: string) {
 	console.log(`\n${"=".repeat(60)}`);
@@ -34,21 +69,19 @@ async function inspectDatabase(databaseId: string, name: string) {
 		console.log(`\n数据库 ID: ${database.id}`);
 		console.log(`标题: ${database.title.map((t) => t.plain_text).join("")}`);
 
-		// 检查当前 Notion API 返回的 data_sources
-		const db = database as any;
-		if (db.data_sources && db.data_sources.length > 0) {
+		if (database.data_sources.length > 0) {
 			console.log(`\n📦 数据源（Data Sources）:`);
-			const firstDataSource = db.data_sources[0];
+			const firstDataSource = database.data_sources[0];
 			console.log(`  ID: ${firstDataSource.id}`);
 			console.log(`  名称: ${firstDataSource.name || "(无名称)"}`);
 
 			// 获取 data source 的详细信息（包含 properties）
 			console.log(`\n🔄 获取 Data Source 详细信息...`);
 			try {
-				const dataSource = (await notion.request({
+				const dataSource = await notion.request<InspectDataSource>({
 					path: `data_sources/${firstDataSource.id}`,
 					method: "get",
-				})) as any;
+				});
 
 				// 检查是否有视图信息
 				if (dataSource.views) {
@@ -62,62 +95,61 @@ async function inspectDatabase(databaseId: string, name: string) {
 
 					// 遍历所有属性
 					for (const [propertyName, property] of Object.entries(dataSource.properties)) {
-						const prop = property as any;
 						console.log(`  ✓ ${propertyName}`);
-						console.log(`    类型: ${prop.type}`);
-						console.log(`    ID: ${prop.id}`);
+						console.log(`    类型: ${property.type}`);
+						console.log(`    ID: ${property.id}`);
 
-						switch (prop.type) {
+						switch (property.type) {
 							case "select":
-								if (prop.select?.options) {
+								if (property.select?.options) {
 									console.log(`    选项:`);
-									prop.select.options.forEach((opt: any) => {
+									property.select.options.forEach((opt) => {
 										console.log(`      - ${opt.name} (${opt.color})`);
 									});
 								}
 								break;
 
 							case "status":
-								if (prop.status?.options) {
+								if (property.status?.options) {
 									console.log(`    状态选项:`);
-									prop.status.options.forEach((opt: any) => {
+									property.status.options.forEach((opt) => {
 										console.log(`      - ${opt.name} (${opt.color})`);
 									});
 								}
-								if (prop.status?.groups) {
+								if (property.status?.groups) {
 									console.log(`    分组:`);
-									prop.status.groups.forEach((group: any) => {
+									property.status.groups.forEach((group) => {
 										console.log(
-											`      - ${group.name} (${group.color}): ${group.option_ids.length} 个选项`,
+											`      - ${group.name} (${group.color}): ${group.option_ids?.length ?? 0} 个选项`,
 										);
 									});
 								}
 								break;
 
 							case "multi_select":
-								if (prop.multi_select?.options) {
+								if (property.multi_select?.options) {
 									console.log(`    选项:`);
-									prop.multi_select.options.forEach((opt: any) => {
+									property.multi_select.options.forEach((opt) => {
 										console.log(`      - ${opt.name} (${opt.color})`);
 									});
 								}
 								break;
 
 							case "number":
-								if (prop.number?.format) {
-									console.log(`    格式: ${prop.number.format}`);
+								if (property.number?.format) {
+									console.log(`    格式: ${property.number.format}`);
 								}
 								break;
 
 							case "formula":
-								if (prop.formula?.expression) {
-									console.log(`    表达式: ${prop.formula.expression}`);
+								if (property.formula?.expression) {
+									console.log(`    表达式: ${property.formula.expression}`);
 								}
 								break;
 
 							case "relation":
-								if (prop.relation?.database_id) {
-									console.log(`    关联数据库: ${prop.relation.database_id}`);
+								if (property.relation?.database_id) {
+									console.log(`    关联数据库: ${property.relation.database_id}`);
 								}
 								break;
 						}
@@ -129,15 +161,15 @@ async function inspectDatabase(databaseId: string, name: string) {
 					console.log("完整 Data Source 响应:");
 					console.log(JSON.stringify(dataSource, null, 2));
 				}
-			} catch (dsError: any) {
-				console.error(`❌ 获取 Data Source 失败:`, dsError.message);
+			} catch (dsError) {
+				console.error(`❌ 获取 Data Source 失败:`, errorMessage(dsError));
 			}
 		} else {
 			console.log("\n⚠️  数据库没有 data_sources");
 		}
-	} catch (error: any) {
-		console.error(`❌ 检查失败:`, error.message);
-		if (error.code === "object_not_found") {
+	} catch (error) {
+		console.error(`❌ 检查失败:`, errorMessage(error));
+		if (errorCode(error) === "object_not_found") {
 			console.log("   提示: 数据库 ID 可能不正确，或集成没有访问权限");
 		}
 	}

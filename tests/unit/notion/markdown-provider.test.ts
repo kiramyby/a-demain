@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { getPostMarkdown } from "@/server/notion/content/markdown-provider";
+import { getPostMarkdown, type MarkdownClient } from "@/server/notion/content/markdown-provider";
 import { NotionContentError, NotionQueryError } from "@/server/notion/errors";
 import { markdownResponse } from "./fixtures";
 
@@ -11,7 +11,7 @@ describe("getPostMarkdown", () => {
 			},
 		};
 
-		await expect(getPostMarkdown("page-1", client as any)).resolves.toEqual({
+		await expect(getPostMarkdown("page-1", client)).resolves.toEqual({
 			markdown: "# Hello Notion\n\nBody text.",
 			truncated: false,
 			unknownBlockIds: [],
@@ -25,7 +25,7 @@ describe("getPostMarkdown", () => {
 			},
 		};
 
-		await expect(getPostMarkdown("page-1", client as any)).rejects.toThrow(NotionContentError);
+		await expect(getPostMarkdown("page-1", client)).rejects.toThrow(NotionContentError);
 	});
 
 	it("fails on unknown blocks", async () => {
@@ -37,7 +37,7 @@ describe("getPostMarkdown", () => {
 			},
 		};
 
-		await expect(getPostMarkdown("page-1", client as any)).rejects.toThrow(NotionContentError);
+		await expect(getPostMarkdown("page-1", client)).rejects.toThrow(NotionContentError);
 	});
 
 	it("wraps API failures", async () => {
@@ -47,6 +47,8 @@ describe("getPostMarkdown", () => {
 			},
 		};
 
-		await expect(getPostMarkdown("page-1", client as any)).rejects.toThrow(NotionQueryError);
+		await expect(getPostMarkdown("page-1", client as MarkdownClient)).rejects.toThrow(
+			NotionQueryError,
+		);
 	});
 });

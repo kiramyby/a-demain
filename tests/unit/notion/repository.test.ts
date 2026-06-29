@@ -2,6 +2,10 @@ import { describe, expect, it, vi } from "vitest";
 import { clearPostRepositoryCache, getPublishedPostMetas } from "@/server/notion/posts/repository";
 import { notionPostPage } from "./fixtures";
 
+type PostRepositoryClient = NonNullable<
+	NonNullable<Parameters<typeof getPublishedPostMetas>[0]>["client"]
+>;
+
 describe("getPublishedPostMetas", () => {
 	it("uses configured view id before data source query", async () => {
 		const request = vi
@@ -15,7 +19,7 @@ describe("getPublishedPostMetas", () => {
 			.mockResolvedValueOnce({ deleted: true });
 
 		const posts = await getPublishedPostMetas({
-			client: { request } as any,
+			client: { request } as unknown as PostRepositoryClient,
 			config: {
 				apiKey: "secret",
 				postsDatabaseId: "db",
@@ -57,7 +61,7 @@ describe("getPublishedPostMetas", () => {
 
 		clearPostRepositoryCache();
 		const posts = await getPublishedPostMetas({
-			client: client as any,
+			client: client as unknown as PostRepositoryClient,
 			config: { apiKey: "secret", postsDatabaseId: "db" },
 		});
 
@@ -90,11 +94,11 @@ describe("getPublishedPostMetas", () => {
 
 		clearPostRepositoryCache();
 		await getPublishedPostMetas({
-			client: { request } as any,
+			client: { request } as unknown as PostRepositoryClient,
 			config: { apiKey: "secret", postsDatabaseId: "db", postsViewId: "view-1" },
 		});
 		await getPublishedPostMetas({
-			client: { request } as any,
+			client: { request } as unknown as PostRepositoryClient,
 			config: { apiKey: "secret", postsDatabaseId: "db", postsViewId: "view-1" },
 		});
 
@@ -116,14 +120,14 @@ describe("getPublishedPostMetas", () => {
 		clearPostRepositoryCache();
 		await expect(
 			getPublishedPostMetas({
-				client: { request } as any,
+				client: { request } as unknown as PostRepositoryClient,
 				config: { apiKey: "secret", postsDatabaseId: "db", postsViewId: "view-1" },
 			}),
 		).rejects.toThrow();
 
 		await expect(
 			getPublishedPostMetas({
-				client: { request } as any,
+				client: { request } as unknown as PostRepositoryClient,
 				config: { apiKey: "secret", postsDatabaseId: "db", postsViewId: "view-1" },
 			}),
 		).resolves.toHaveLength(1);

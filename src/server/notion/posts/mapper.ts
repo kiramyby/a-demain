@@ -13,7 +13,7 @@ type NotionProperty = {
 	url?: string | null;
 };
 
-type NotionPageLike = {
+export type NotionPageLike = {
 	id?: string;
 	object?: string;
 	properties?: Record<string, NotionProperty>;

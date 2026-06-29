@@ -1,18 +1,22 @@
+import type { QueryDataSourceResponse } from "@notionhq/client";
 import type { NotionClient } from "../client";
 import { createNotionClient } from "../client";
 import { type NotionFriendsConfig, readNotionFriendsConfig } from "../config";
-import { resolveDatabaseDataSourceId } from "../database/data-source-resolver";
+import { type DatabaseClient, resolveDatabaseDataSourceId } from "../database/data-source-resolver";
 import { NotionQueryError } from "../errors";
 import { FRIEND_PROPERTIES, type Friend } from "./schema";
 
-type RepositoryDeps = {
-	client?: NotionClient;
-	config?: NotionFriendsConfig;
+type FriendRepositoryClient = DatabaseClient & {
+	dataSources: {
+		query(
+			args: Parameters<NotionClient["dataSources"]["query"]>[0],
+		): Promise<QueryDataSourceResponse>;
+	};
 };
 
-type DataSourceQueryResponse = {
-	results: unknown[];
-	next_cursor: string | null;
+type RepositoryDeps = {
+	client?: FriendRepositoryClient;
+	config?: NotionFriendsConfig;
 };
 
 type NotionRichText = { plain_text?: string };
@@ -91,10 +95,10 @@ export async function getActiveFriends(deps: RepositoryDeps = {}): Promise<Frien
 		let cursor: string | undefined;
 
 		do {
-			const response = (await client.dataSources.query({
+			const response = await client.dataSources.query({
 				data_source_id: dataSourceId,
 				...activeFriendsQuery(cursor),
-			})) as DataSourceQueryResponse;
+			});
 
 			pages.push(...response.results);
 			cursor = response.next_cursor ?? undefined;

@@ -1,6 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
-import { resolvePostsDataSourceId } from "@/server/notion/database/data-source-resolver";
-import { queryViewPages } from "@/server/notion/database/view-resolver";
+import {
+	type DatabaseClient,
+	resolvePostsDataSourceId,
+} from "@/server/notion/database/data-source-resolver";
+import { queryViewPages, type RequestClient } from "@/server/notion/database/view-resolver";
 import { NotionQueryError } from "@/server/notion/errors";
 import { notionPostPage } from "./fixtures";
 
@@ -9,7 +12,7 @@ describe("resolvePostsDataSourceId", () => {
 		const client = { databases: { retrieve: vi.fn() } };
 
 		await expect(
-			resolvePostsDataSourceId(client as any, {
+			resolvePostsDataSourceId(client as unknown as DatabaseClient, {
 				postsDatabaseId: "db",
 				postsDataSourceId: "explicit-ds",
 			}),
@@ -28,9 +31,9 @@ describe("resolvePostsDataSourceId", () => {
 			},
 		};
 
-		await expect(resolvePostsDataSourceId(client as any, { postsDatabaseId: "db" })).resolves.toBe(
-			"resolved-ds",
-		);
+		await expect(
+			resolvePostsDataSourceId(client as unknown as DatabaseClient, { postsDatabaseId: "db" }),
+		).resolves.toBe("resolved-ds");
 	});
 });
 
@@ -54,9 +57,9 @@ describe("queryViewPages", () => {
 			})
 			.mockResolvedValueOnce({ object: "view_query", id: "query-1", deleted: true });
 
-		const pages = await queryViewPages({ request } as any, "view-1");
+		const pages = await queryViewPages({ request } as unknown as RequestClient, "view-1");
 
-		expect(pages.map((page: any) => page.id)).toEqual(["page-1", "page-2"]);
+		expect(pages.map((page) => (page as { id?: string }).id)).toEqual(["page-1", "page-2"]);
 		expect(request).toHaveBeenNthCalledWith(1, {
 			method: "post",
 			path: "views/view-1/queries",
@@ -85,12 +88,17 @@ describe("queryViewPages", () => {
 			})
 			.mockRejectedValueOnce(new Error("cleanup failed"));
 
-		await expect(queryViewPages({ request } as any, "view-1")).resolves.toHaveLength(1);
+		await expect(
+			queryViewPages({ request } as unknown as RequestClient, "view-1"),
+		).resolves.toHaveLength(1);
 	});
 
 	it("wraps query failures", async () => {
 		await expect(
-			queryViewPages({ request: vi.fn().mockRejectedValue(new Error("boom")) } as any, "view-1"),
+			queryViewPages(
+				{ request: vi.fn().mockRejectedValue(new Error("boom")) } as unknown as RequestClient,
+				"view-1",
+			),
 		).rejects.toThrow(NotionQueryError);
 	});
 });

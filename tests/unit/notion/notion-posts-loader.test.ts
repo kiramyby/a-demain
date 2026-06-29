@@ -1,3 +1,4 @@
+import type { LoaderContext } from "astro/loaders";
 import { describe, expect, it, vi } from "vitest";
 import { notionPostsLoader } from "@/server/notion/astro/notion-posts-loader";
 
@@ -25,7 +26,7 @@ describe("notionPostsLoader", () => {
 				error: vi.fn(),
 				debug: vi.fn(),
 			},
-		} as any);
+		} as unknown as LoaderContext);
 
 		expect(clear).toHaveBeenCalledOnce();
 		expect(set).not.toHaveBeenCalled();
@@ -68,7 +69,7 @@ describe("notionPostsLoader", () => {
 				clear: vi.fn(),
 				set,
 			},
-			parseData: async ({ data }: any) => data,
+			parseData: async ({ data }: { data: Record<string, unknown> }) => data,
 			renderMarkdown: async (markdown: string) => ({
 				html: `<h1>${markdown.replace("# ", "")}</h1>`,
 			}),
@@ -79,7 +80,7 @@ describe("notionPostsLoader", () => {
 				error: vi.fn(),
 				debug: vi.fn(),
 			},
-		} as any);
+		} as unknown as LoaderContext);
 
 		expect(set).toHaveBeenCalledWith({
 			id: "hello-notion",

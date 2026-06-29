@@ -1,12 +1,14 @@
 import { NotionQueryError } from "../errors";
 
-type RequestClient = {
-	request(args: {
-		method: "get" | "post" | "delete";
-		path: string;
-		body?: Record<string, unknown>;
-		query?: Record<string, string | number | boolean | string[]>;
-	}): Promise<any>;
+type RequestArgs = {
+	method: "get" | "post" | "delete";
+	path: string;
+	body?: Record<string, unknown>;
+	query?: Record<string, string | number | boolean | string[]>;
+};
+
+export type RequestClient = {
+	request<ResponseBody extends object>(args: RequestArgs): Promise<ResponseBody>;
 };
 
 type ViewQueryResponse = {
@@ -24,22 +26,22 @@ export async function queryViewPages(
 	let queryId: string | null = null;
 
 	try {
-		const firstPage = (await client.request({
+		const firstPage = await client.request<ViewQueryResponse>({
 			method: "post",
 			path: `views/${viewId}/queries`,
 			body: { page_size: pageSize },
-		})) as ViewQueryResponse;
+		});
 
 		queryId = firstPage.id;
 		const pages = [...firstPage.results];
 		let cursor = firstPage.next_cursor;
 
 		while (cursor) {
-			const nextPage = (await client.request({
+			const nextPage = await client.request<ViewQueryResponse>({
 				method: "get",
 				path: `views/${viewId}/queries/${queryId}`,
 				query: { start_cursor: cursor, page_size: pageSize },
-			})) as ViewQueryResponse;
+			});
 
 			pages.push(...nextPage.results);
 			cursor = nextPage.next_cursor;

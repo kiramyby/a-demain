@@ -1,4 +1,4 @@
-import { isFullDatabase } from "@notionhq/client";
+import { type GetDatabaseResponse, isFullDatabase } from "@notionhq/client";
 import { NotionQueryError } from "../errors";
 
 type Config = {
@@ -6,9 +6,9 @@ type Config = {
 	postsDataSourceId?: string;
 };
 
-type DatabaseClient = {
+export type DatabaseClient = {
 	databases: {
-		retrieve(args: { database_id: string }): Promise<unknown>;
+		retrieve(args: { database_id: string }): Promise<GetDatabaseResponse>;
 	};
 };
 
@@ -36,11 +36,11 @@ export async function resolveDatabaseDataSourceId(
 		database_id: databaseId,
 	});
 
-	if (!isFullDatabase(database as any)) {
+	if (!isFullDatabase(database)) {
 		throw new NotionQueryError(`No read permissions on database ${databaseId}`);
 	}
 
-	const dataSourceId = (database as any).data_sources?.[0]?.id;
+	const dataSourceId = database.data_sources[0]?.id;
 	if (!dataSourceId) {
 		throw new NotionQueryError(`Database ${databaseId} has no data sources`);
 	}

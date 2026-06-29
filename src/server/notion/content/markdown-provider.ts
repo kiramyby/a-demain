@@ -1,4 +1,3 @@
-import type { NotionClient } from "../client";
 import { NotionContentError, NotionQueryError } from "../errors";
 
 export type PostMarkdown = {
@@ -13,14 +12,20 @@ type PageMarkdownResponse = {
 	unknown_block_ids: string[];
 };
 
-async function createDefaultClient(): Promise<NotionClient> {
+export type MarkdownClient = {
+	pages: {
+		retrieveMarkdown(args: { page_id: string }): Promise<PageMarkdownResponse>;
+	};
+};
+
+async function createDefaultClient(): Promise<MarkdownClient> {
 	const { createNotionClient } = await import("../client");
 	return createNotionClient();
 }
 
 export async function getPostMarkdown(
 	pageId: string,
-	client?: NotionClient,
+	client?: MarkdownClient,
 ): Promise<PostMarkdown> {
 	try {
 		const notionClient = client ?? (await createDefaultClient());
