@@ -1,11 +1,11 @@
 // @ts-check
 
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import icon from "astro-icon";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

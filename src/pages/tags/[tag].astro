@@ -1,24 +1,24 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
-import { termRouteParam } from "@/lib/content-routes";
+import { type CollectionEntry, getCollection } from "astro:content";
 import BrowseLayout from "@/layouts/BrowseLayout.astro";
+import { termRouteParam } from "@/lib/content-routes";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("posts");
-  const tags = Array.from(new Set(posts.flatMap((post) => post.data.tags)));
+	const posts = await getCollection("posts");
+	const tags = Array.from(new Set(posts.flatMap((post) => post.data.tags)));
 
-  return tags.map((tag) => ({
-    params: { tag: termRouteParam(tag) },
-    props: {
-      tag,
-      posts: posts.filter((post) => post.data.tags.includes(tag)),
-    },
-  }));
+	return tags.map((tag) => ({
+		params: { tag: termRouteParam(tag) },
+		props: {
+			tag,
+			posts: posts.filter((post) => post.data.tags.includes(tag)),
+		},
+	}));
 }
 
 type Props = {
-  tag: string;
-  posts: CollectionEntry<"posts">[];
+	tag: string;
+	posts: CollectionEntry<"posts">[];
 };
 
 const { tag, posts } = Astro.props as Props;

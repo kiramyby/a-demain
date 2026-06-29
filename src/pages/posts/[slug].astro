@@ -1,18 +1,18 @@
 ---
-import { getCollection, render, type CollectionEntry } from "astro:content";
-import { categoryHref, tagHref } from "@/lib/content-routes";
+import { type CollectionEntry, getCollection, render } from "astro:content";
 import BrowseLayout from "@/layouts/BrowseLayout.astro";
+import { categoryHref, tagHref } from "@/lib/content-routes";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("posts");
-  return posts.map((post) => ({
-    params: { slug: post.id },
-    props: { post },
-  }));
+	const posts = await getCollection("posts");
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: { post },
+	}));
 }
 
 type Props = {
-  post: CollectionEntry<"posts">;
+	post: CollectionEntry<"posts">;
 };
 
 const { post } = Astro.props as Props;

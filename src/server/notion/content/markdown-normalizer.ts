@@ -1,16 +1,13 @@
-import {
-  findNotionMediaDiagnostics,
-  type MarkdownDiagnostic,
-} from "./media-policy"
+import { findNotionMediaDiagnostics, type MarkdownDiagnostic } from "./media-policy";
 
 export type NormalizedMarkdown = {
-  markdown: string
-  diagnostics: MarkdownDiagnostic[]
-}
+	markdown: string;
+	diagnostics: MarkdownDiagnostic[];
+};
 
 export function normalizeNotionMarkdown(markdown: string): NormalizedMarkdown {
-  return {
-    markdown,
-    diagnostics: findNotionMediaDiagnostics(markdown),
-  }
+	return {
+		markdown,
+		diagnostics: findNotionMediaDiagnostics(markdown),
+	};
 }

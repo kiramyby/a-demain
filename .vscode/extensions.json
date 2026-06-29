@@ -1,7 +1,4 @@
 {
-	"recommendations": [
-		"astro-build.astro-vscode",
-		"highagency.pencildev"
-	],
+	"recommendations": ["astro-build.astro-vscode", "highagency.pencildev"],
 	"unwantedRecommendations": []
 }

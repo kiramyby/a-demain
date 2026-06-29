@@ -1,1 +1,1 @@
-export { notionPostsLoader } from "./astro/notion-posts-loader"
+export { notionPostsLoader } from "./astro/notion-posts-loader";

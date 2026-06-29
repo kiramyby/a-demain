@@ -1,12 +1,12 @@
 ---
 import { getCollection } from "astro:content";
-import { categoryHref, tagHref } from "@/lib/content-routes";
 import BrowseLayout from "@/layouts/BrowseLayout.astro";
+import { categoryHref, tagHref } from "@/lib/content-routes";
 
 const posts = (await getCollection("posts")).sort((a, b) => {
-  const left = a.data.publishedDate?.valueOf() ?? 0;
-  const right = b.data.publishedDate?.valueOf() ?? 0;
-  return right - left;
+	const left = a.data.publishedDate?.valueOf() ?? 0;
+	const right = b.data.publishedDate?.valueOf() ?? 0;
+	return right - left;
 });
 ---
 
