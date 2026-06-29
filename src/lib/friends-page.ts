@@ -24,6 +24,25 @@ export type FriendsPageState =
 			message: string;
 	  };
 
+export type FriendsPageCard = {
+	id: string;
+	name: string;
+	url: string;
+	avatar: string;
+	description: string;
+	group: string;
+};
+
+export type FriendsPageView = {
+	heading: "Friends";
+	notice?: string;
+	responseStatus?: {
+		status: number;
+		statusText: string;
+	};
+	cards: FriendsPageCard[];
+};
+
 export async function loadFriendsPageState(
 	loadFriends: () => Promise<Friend[]>,
 	config: FriendsFeatureConfig = SITE_FEATURES.friends,
@@ -58,5 +77,47 @@ export async function loadFriendsPageState(
 			kind: "error",
 			message: "Friends are unavailable right now.",
 		};
+	}
+}
+
+export function getFriendsPageView(state: FriendsPageState): FriendsPageView {
+	switch (state.kind) {
+		case "disabled":
+			return {
+				heading: "Friends",
+				notice: state.message,
+				responseStatus: {
+					status: 404,
+					statusText: "Not found",
+				},
+				cards: [],
+			};
+
+		case "error":
+			return {
+				heading: "Friends",
+				notice: state.message,
+				cards: [],
+			};
+
+		case "empty":
+			return {
+				heading: "Friends",
+				notice: "No active friends yet.",
+				cards: [],
+			};
+
+		case "ready":
+			return {
+				heading: "Friends",
+				cards: state.friends.map((friend) => ({
+					id: friend.id,
+					name: friend.name,
+					url: friend.url,
+					avatar: friend.avatar,
+					description: friend.description,
+					group: friend.group,
+				})),
+			};
 	}
 }

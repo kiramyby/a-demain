@@ -39,7 +39,7 @@ The current friends route surface is:
 
 - `/friends`
 
-[src/pages/friends/index.astro](../../src/pages/friends/index.astro) loads the friends page state through [src/lib/friends-page.ts](../../src/lib/friends-page.ts). The page state calls [src/server/notion/friends/repository.ts](../../src/server/notion/friends/repository.ts), renders active Friends when they exist, renders an empty state when no active Friends are returned, and renders an unavailable state when friends cannot be loaded.
+[src/pages/friends/index.astro](../../src/pages/friends/index.astro) loads the friends page state and view model through [src/lib/friends-page.ts](../../src/lib/friends-page.ts). The page state calls [src/server/notion/friends/repository.ts](../../src/server/notion/friends/repository.ts). The view model carries the page heading, notice copy, response status, and Friend cards used by the route.
 
 [src/config.ts](../../src/config.ts) currently enables the friends route through `SITE_FEATURES.friends.route`. [src/components/NavBar.astro](../../src/components/NavBar.astro) uses the same setting to show the Friends navigation link. When the friends route is disabled in site config, [src/pages/friends/index.astro](../../src/pages/friends/index.astro) sets a 404 response status and renders the disabled state.
 

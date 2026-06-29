@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { loadFriendsPageState } from "@/lib/friends-page";
+import { getFriendsPageView, loadFriendsPageState } from "@/lib/friends-page";
 import type { Friend } from "@/server/notion/friends/schema";
 
 const friend: Friend = {
@@ -68,5 +68,56 @@ describe("loadFriendsPageState", () => {
 				{ route: true, failBuildOnError: true },
 			),
 		).rejects.toThrow("missing config");
+	});
+});
+
+describe("getFriendsPageView", () => {
+	it("returns disabled route copy and response status", () => {
+		expect(getFriendsPageView({ kind: "disabled", message: "Friends are not enabled." })).toEqual({
+			heading: "Friends",
+			notice: "Friends are not enabled.",
+			responseStatus: {
+				status: 404,
+				statusText: "Not found",
+			},
+			cards: [],
+		});
+	});
+
+	it("returns unavailable copy without changing response status", () => {
+		expect(
+			getFriendsPageView({
+				kind: "error",
+				message: "Friends are unavailable right now.",
+			}),
+		).toEqual({
+			heading: "Friends",
+			notice: "Friends are unavailable right now.",
+			cards: [],
+		});
+	});
+
+	it("returns empty copy without changing response status", () => {
+		expect(getFriendsPageView({ kind: "empty", friends: [] })).toEqual({
+			heading: "Friends",
+			notice: "No active friends yet.",
+			cards: [],
+		});
+	});
+
+	it("returns friend card content for ready state", () => {
+		expect(getFriendsPageView({ kind: "ready", friends: [friend] })).toEqual({
+			heading: "Friends",
+			cards: [
+				{
+					id: "friend-1",
+					name: "Kira",
+					url: "https://example.com",
+					avatar: "https://example.com/avatar.png",
+					description: "A personal site",
+					group: "Blog",
+				},
+			],
+		});
 	});
 });

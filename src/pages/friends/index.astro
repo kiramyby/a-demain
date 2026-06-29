@@ -1,41 +1,34 @@
 ---
 import { SITE_FEATURES } from "@/config";
 import BrowseLayout from "@/layouts/BrowseLayout.astro";
-import { loadFriendsPageState } from "@/lib/friends-page";
+import { getFriendsPageView, loadFriendsPageState } from "@/lib/friends-page";
 import { getActiveFriends } from "@/server/notion/friends/repository";
 
 const state = await loadFriendsPageState(getActiveFriends, SITE_FEATURES.friends);
+const view = getFriendsPageView(state);
 
-if (state.kind === "disabled") {
-	Astro.response.status = 404;
-	Astro.response.statusText = "Not found";
+if (view.responseStatus) {
+	Astro.response.status = view.responseStatus.status;
+	Astro.response.statusText = view.responseStatus.statusText;
 }
 ---
 
 <BrowseLayout>
   <section class="px-6 py-10 lg:px-10">
-    <h1 class="text-4xl font-bold">Friends</h1>
+    <h1 class="text-4xl font-bold">{view.heading}</h1>
 
     {
-      (state.kind === "disabled" || state.kind === "error") && (
+      view.notice && (
         <p class="border-border bg-secondary-background mt-8 border-3 p-5">
-          {state.message}
+          {view.notice}
         </p>
       )
     }
 
     {
-      state.kind === "empty" && (
-        <p class="border-border bg-secondary-background mt-8 border-3 p-5">
-          No active friends yet.
-        </p>
-      )
-    }
-
-    {
-      state.kind === "ready" && (
+      view.cards.length > 0 && (
         <div class="mt-8 grid gap-4 md:grid-cols-2">
-          {state.friends.map((friend) => (
+          {view.cards.map((friend) => (
             <article class="border-border bg-secondary-background border-3 p-5">
               <div class="flex gap-4">
                 {friend.avatar && (
