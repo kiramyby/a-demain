@@ -1,6 +1,6 @@
 # Blog content pipeline
 
-Current as of 2026-06-29.
+Current as of 2026-06-30.
 
 ## Summary
 
@@ -35,6 +35,8 @@ The current route surfaces and category/tag route encoding are documented in [Si
 Blog content sync is a build-time integration. It requires valid Notion credentials, usable Notion identifiers, and network access when Astro content sync runs through the blog pipeline entry points.
 
 `pnpm typecheck` sets `SKIP_NOTION_CONTENT_SYNC=1`, so the Notion posts loader clears the collection store and returns without contacting Notion during Astro check.
+
+[playwright.config.ts](../../playwright.config.ts) starts its test dev server with `SKIP_NOTION_CONTENT_SYNC=1`, so Playwright route smoke tests also avoid loading the Notion posts collection.
 
 Notion-hosted signed media handling is documented in [Content rendering](./content-rendering.md).
 

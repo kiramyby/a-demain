@@ -20,3 +20,9 @@ test("/tags loads", async ({ page }) => {
 	await page.goto("/tags");
 	await expect(page.getByRole("heading", { name: "Tags" })).toBeVisible();
 });
+
+test("/friends loads", async ({ page }) => {
+	const response = await page.goto("/friends");
+	expect(response?.status()).toBeLessThan(400);
+	await expect(page.getByRole("heading", { name: "Friends" })).toBeVisible();
+});

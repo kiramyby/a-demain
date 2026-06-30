@@ -13,7 +13,7 @@ export default defineConfig({
 		{ name: "mobile", use: { ...devices["iPhone 13"], browserName: "chromium" } },
 	],
 	webServer: {
-		command: "pnpm dev",
+		command: "SKIP_NOTION_CONTENT_SYNC=1 pnpm dev",
 		url: "http://localhost:4321",
 		reuseExistingServer: true,
 	},
